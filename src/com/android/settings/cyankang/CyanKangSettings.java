@@ -27,12 +27,15 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
+import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
+import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class CyanKangSettings extends SettingsPreferenceFragment implements
-Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "CyanKangSettings";
 
     private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
@@ -40,12 +43,14 @@ Preference.OnPreferenceChangeListener {
     private static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
     private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
     private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
+    private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
     private CheckBoxPreference mStatusBarTraffic_enable;
     private CheckBoxPreference mStatusBarTraffic_hide;
     private ListPreference mStatusBarTraffic_summary;
     private ListPreference mStatusBarNetStatsUpdate;
     private CheckBoxPreference mStatusBarNetworkStats;
+    private ListPreference mLowBatteryWarning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,11 +86,23 @@ Preference.OnPreferenceChangeListener {
         mStatusBarNetStatsUpdate.setOnPreferenceChangeListener(this);
 
         mStatusBarTraffic_summary.setEnabled(!mStatusBarNetworkStats.isChecked());
+
+        mLowBatteryWarning = (ListPreference) findPreference(KEY_LOW_BATTERY_WARNING_POLICY);
+        int lowBatteryWarning = Settings.System.getInt(resolver,
+                Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, 0);
+        mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
+        mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
+        mLowBatteryWarning.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
     
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -103,6 +120,13 @@ Preference.OnPreferenceChangeListener {
             Settings.System.putLong(resolver,
                     Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, updateInterval);
             mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntries()[index]);
+            return true;
+        } else if (preference == mLowBatteryWarning) {
+            int lowBatteryWarning = Integer.valueOf((String) objValue);
+            int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
+            Settings.System.putInt(resolver, Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY,
+                    lowBatteryWarning);
+            mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
         }
         return false;
