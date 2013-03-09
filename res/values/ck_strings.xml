@@ -32,4 +32,7 @@
     <string name="low_battery_warning_policy_sound">Sound only</string>
     <string name="low_battery_warning_policy_disabled">Disabled</string>
 
+    <!-- TRDS Settings -->
+    <string name="trds_settings_title">Dark UI (TRDS)</string>
+
 </resources>
