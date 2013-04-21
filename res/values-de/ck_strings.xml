@@ -21,6 +21,7 @@
 
     <!-- CyanKang Settings -->
     <string name="cyankang_settings">CyanKang Einstellungen/string>
+    <string name="status_bar_title">StatusBar</string>
 
     <!-- Advanced low battery indicator options -->
     <string name="pref_low_battery_warning_policy_title">Warnung bei niedrigem Batteriestand</string>

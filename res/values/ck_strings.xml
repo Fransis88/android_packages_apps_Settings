@@ -24,6 +24,7 @@
 
     <!-- CyanKang Settings -->
     <string name="cyankang_settings">CyanKang Settings/string>
+    <string name="status_bar_title">Status bar</string>
 
     <!-- Settings Group: Tweaks -->
     <string name="tweaks_category">Tweaks</string>
@@ -40,5 +41,25 @@
 
     <!-- TRDS Settings -->
     <string name="trds_settings_title">Dark UI (TRDS)</string>
+
+    <!-- Quick settings -->
+    <string name="quick_pulldown_title">Quick Settings pulldown</string>
+    <string name="quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
+    <string name="quick_pulldown_summary_left">Left</string>
+    <string name="quick_pulldown_summary_right">Right</string>
+    <string name="quick_pulldown_off">Off</string>
+    <string name="quick_pulldown_left">Left</string>
+    <string name="quick_pulldown_right">Right</string>
+
+    <!-- Status bar brightness control -->
+    <string name="status_bar_toggle_brightness">Brightness control</string>
+    <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>
+    <string name="status_bar_toggle_info">Automatic brightness must be disabled</string>
+
+    <!--- Volume key cursor control -->
+    <string name="volume_key_cursor_control_title">Volume key cursor control</string>
+    <string name="volume_key_cursor_control_off">Disabled</string>
+    <string name="volume_key_cursor_control_on">Volume up/down moves cursor left/right</string>
+    <string name="volume_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
 </resources>
