@@ -21,6 +21,7 @@
 
     <!-- CyanKang Settings -->
     <string name="cyankang_settings">CyanKang Einstellungen</string>
+    <string name="status_bar_title">StatusBar</string>
 
     <!-- TRDS Settings -->
     <string name="trds_settings_title">Dark UI (TRDS)</string>
