@@ -430,4 +430,7 @@
     <!-- Default app picker -->
     <string name="reverse_default_app_picker">Reverse default app picker</string>
     <string name="reverse_default_app_picker_summary">Mark the last used option instead of the last used app</string>
+
+    <!-- Restart SystemUI -->
+    <string name="restart_systemui">Restart SystemUI</string>
 </resources>

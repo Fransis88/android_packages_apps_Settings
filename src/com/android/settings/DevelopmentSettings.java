@@ -69,6 +69,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.util.Helpers;
+
 import dalvik.system.VMRuntime;
 
 import java.io.File;
@@ -99,6 +101,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ADB_TCPIP  = "adb_over_network";
     private static final String ENABLE_TERMINAL = "enable_terminal";
+    private static final String RESTART_SYSTEMUI = "restart_systemui";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String SELECT_RUNTIME_KEY = "select_runtime";
@@ -176,6 +179,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mAdbNotify;
     private Preference mClearAdbKeys;
     private CheckBoxPreference mEnableTerminal;
+    private Preference mRestartSystemUI;
     private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mAdbOverNetwork;
@@ -280,6 +284,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             debugDebuggingCategory.removePreference(mEnableTerminal);
             mEnableTerminal = null;
         }
+
+        mRestartSystemUI = findPreference(RESTART_SYSTEMUI);
 
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
@@ -1331,6 +1337,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mVerifyAppsOverUsb.setChecked(false);
                 updateBugreportOptions();
             }
+        } else if (preference == mRestartSystemUI) {
+            Helpers.restartSystemUI(); 
         } else if (preference == mAdbNotify) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ADB_NOTIFY,
