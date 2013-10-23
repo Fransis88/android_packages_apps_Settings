@@ -30,7 +30,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -77,8 +76,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
 
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
-    private static final String PREF_NOTIFICATION_SHOW_WIFI_SSID = "notification_show_wifi_ssid";
-    private static final String PREF_NOTIFICATION_OPTIONS = "options";
 
     private static final String CATEGORY_LIGHTS = "lights_prefs";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
@@ -97,7 +94,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private Preference mCustomLabel;
     private CheckBoxPreference mScreenOnNotificationLed;
-    CheckBoxPreference mShowWifiName;
     private PreferenceScreen mDisplayRotationPreference;
     private FontDialogPreference mFontSizePref;
 
@@ -228,10 +224,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
-
-        mShowWifiName = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SHOW_WIFI_SSID);
-        mShowWifiName.setChecked(Settings.System.getInt(resolver,
-                Settings.System.NOTIFICATION_SHOW_WIFI_SSID, 0) == 1);
 
         PackageManager pm = getPackageManager();
         boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
@@ -541,16 +533,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             });
 
             alert.show();
-        } else if (preference == mShowWifiName) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.NOTIFICATION_SHOW_WIFI_SSID,
-                    mShowWifiName.isChecked() ? 1 : 0);
-            return true; 
         } else if (preference == mScreenOnNotificationLed) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SCREEN_ON_NOTIFICATION_LED,
                     mScreenOnNotificationLed.isChecked() ? 1 : 0);
         }
+
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

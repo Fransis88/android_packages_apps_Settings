@@ -65,12 +65,10 @@
     <string name="battery_bar_animate_title">Lade-Animation</string>
     <string name="battery_bar_animate_summary">Die Lade-Animation kann zu trägem Verhalten des Gerätes führen. Aktiviere sie, nach deinem eigenen Ermessen.</string>
 
-    <!-- Custom Carrier Text and Show WiFi Label-->
+    <!-- Custom Carrier Text-->
     <string name="custom_carrier_label_title">eigener Netzbetreiber-Text</string>
     <string name="custom_carrier_label_explain">Bitte trage einen neuen Text ein. Lasse das Feld leer, um den original Netzbetreiber-Text anzuzeigen.</string>
     <string name="custom_carrier_label_notset">kein eigener Text gesetzt</string>
-    <string name="notification_show_wifi_ssid_title">WLAN-Netzwerk-Name anzeigen</string>
-    <string name="notification_show_wifi_ssid_summary">Den namen des aktuell verbundenen WLAN-Netzwerks anzeigen</string>
 
     <!-- Status bar | Clock -->
     <string name="status_bar_style_title">Stil</string>
