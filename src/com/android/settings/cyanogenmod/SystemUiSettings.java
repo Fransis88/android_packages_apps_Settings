@@ -19,6 +19,7 @@ package com.android.settings.cyanogenmod;
 import android.app.INotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -60,6 +61,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
+    private static final String KEY_PIE_SETTINGS = "pie_settings";
+    private static final String SHOW_CPU_INFO_KEY = "show_cpu_info";   
 
     private ListPreference mNavigationBarHeight;
     private PreferenceScreen mPieControl;
@@ -72,6 +75,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mDualPanel;
+    private CheckBoxPreference mShowCpuInfo;
 
     private INotificationManager mNotificationManager;
 
@@ -188,6 +192,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
 
+        // CPU info
+        mShowCpuInfo = (CheckBoxPreference) findPreference(SHOW_CPU_INFO_KEY);
+        mShowCpuInfo.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.Global.SHOW_CPU, 0) != 0));
+
     }
 
     @Override
@@ -195,6 +204,23 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         super.onResume();
         updatePieControlSummary();
     }
+
+    void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
+        checkBox.setChecked(value);
+    } 
+
+    private void writeCpuInfoOptions() {
+        boolean value = mShowCpuInfo.isChecked();
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.SHOW_CPU, value ? 1 : 0);
+        Intent service = (new Intent())
+                .setClassName("com.android.systemui", "com.android.systemui.CPUInfoService");
+        if (value) {
+            getActivity().startService(service);
+        } else {
+            getActivity().stopService(service);
+        }
+    }  
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mExpandedDesktopPref) {
@@ -265,6 +291,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
             Settings.System.putBoolean(getContentResolver(),
                     Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
             return true;
+        } else if (preference == mShowCpuInfo) {
+            writeCpuInfoOptions();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

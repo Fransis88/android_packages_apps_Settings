@@ -502,4 +502,9 @@ solltest, wiederhole diese Anleitung von Anfang an."</string>
 
     <string name="battery_around_lockscreen_ring">Batteriestand um den Entsperring anzeigen</string>
 
+    <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
+    <string name="show_cpu_info">CPU-Info anzeigen</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
+    <string name="show_cpu_info_summary">Bildschirm-Overlay mit aktuellen CPU-Informationen einblenden</string>
+
 </resources>

@@ -179,6 +179,12 @@
             android:entryValues="@array/listview_interpolator_values"
             android:defaultValue="0" />
 
+        <!-- CPU info -->
+        <CheckBoxPreference
+           android:key="show_cpu_info"
+           android:title="@string/show_cpu_info"
+           android:summary="@string/show_cpu_info_summary"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
