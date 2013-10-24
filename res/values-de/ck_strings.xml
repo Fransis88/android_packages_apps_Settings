@@ -470,6 +470,9 @@ solltest, wiederhole diese Anleitung von Anfang an."</string>
     <string name="ad_redisplay_1h">1 Stunde</string>
     <string name="ad_redisplay_2h">2 Stunden</string>
     <string name="ad_redisplay_5h">5 Stunden</string>
+    <string name="ad_pocket_mode_off">Aus</string>         
+    <string name="ad_pocket_mode_notifications">Nur Benachrichtigungen</string>        
+    <string name="ad_pocket_mode_always">Immer</string>
     <string name="ad_timeout_title">Display timeout</string>
     <string name="ad_timeout_3s">3 Sekunden</string>
     <string name="ad_timeout_5s">5 Sekunden</string>
