@@ -250,6 +250,7 @@ your apps faster.</string>
     <string name="trds_settings_title">Dark UI (TRDS)</string>
 
     <!-- Network speed -->
+    <string name="status_bar_network_title">Network traffic</string>
     <string name="enable_network_speed">Network speed indicator</string>
     <string name="enable_network_speed_summary">Show network speed in statusbar</string>
     <string name="hide_network_speed">Hide when there is no traffic</string>
@@ -264,6 +265,10 @@ your apps faster.</string>
     <string name="traffic_timeout_10s">10 seconds</string>
     <string name="traffic_timeout_15s">15 seconds</string>
     <string name="traffic_timeout_25s">25 seconds</string>
+
+    <string name="status_bar_show_network_stats_title">Use MIUI style</string>
+    <string name="status_bar_show_network_stats_summary">Use MIUI style NetStats instead of classic Traffic meter</string>
+    <string name="status_bar_network_stats_update_title">Update frequency</string>
 
     <!-- Network speed color style -->
     <string name="network_speed_color_title">Network speed color</string>
@@ -522,9 +527,5 @@ step 1."</string>
     <string name="show_cpu_info">Show CPU info</string>
     <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
     <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
-
-    <string name="status_bar_network_title">Network traffic</string>
-    <string name="status_bar_show_network_stats_title">Show network speeds</string>
-    <string name="status_bar_network_stats_update_title">Update frequency</string>
 
 </resources>

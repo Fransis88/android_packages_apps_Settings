@@ -238,6 +238,7 @@ hilft, diese Anwendungen schneller zu öffnen.</string>
     <string name="trds_settings_title">Dark UI (TRDS)</string>
 
     <!-- Network speed -->
+    <string name="status_bar_network_title">Netzwerk-Datendurchsatz</string>
     <string name="enable_network_speed">Anzeige des Datendurchsatzes</string>
     <string name="enable_network_speed_summary">Den aktuellen Datendurchsatz in der Statusleiste anzeigen</string>
     <string name="hide_network_speed">Ausblenden wenn kein Durchsatz</string>
@@ -252,6 +253,10 @@ hilft, diese Anwendungen schneller zu öffnen.</string>
     <string name="traffic_timeout_10s">10 Sekunden</string>
     <string name="traffic_timeout_15s">15 Sekunden</string>
     <string name="traffic_timeout_25s">25 Sekunden</string>
+
+    <string name="status_bar_show_network_stats_title">MIUI-Stil benutzen</string>
+    <string name="status_bar_show_network_stats_summary">MIUI NetStats anstatt des klassichen Traffic-Meter anzeigen</string>
+    <string name="status_bar_network_stats_update_title">Aktualisierungs-Geschwindigkeit</string>
 
     <!-- Network speed color style -->
     <string name="network_speed_color_title">Farbe der Datendurchsatz-Anzeige</string>
