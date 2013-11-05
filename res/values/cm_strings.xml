@@ -77,6 +77,7 @@
     <string name="quiet_hours_note_summary">Note: Incoming calls will not be affected by quiet hours and will ring like normal</string>
     <string name="quiet_hours_enabled">Enforce quiet hours</string>
     <string name="quiet_hours_mute">Mute notifications</string>
+    <string name="quiet_hours_system">Disable system sounds</string>
     <string name="quiet_hours_still">Disable vibrations</string>
     <string name="quiet_hours_dim">Disable notification light</string>
     <string name="quiet_hours_haptic">Disable haptic feedback</string>
@@ -344,12 +345,6 @@
 
     <!-- Performance Settings : Performance profile settings -->
     <string name="perf_profile_title">Profile</string>
-    <string name="perf_profile_summary" translatable="false">%s</string>
-
-    <!-- Performance Settings : Performance profile modes -->
-    <string name="perf_profile_pwrsv">Power save</string>
-    <string name="perf_profile_bal">Balanced</string>
-    <string name="perf_profile_perf">Performance</string>
 
     <!-- Memory Management -->
     <string name="memory_management_title">Memory management</string>
@@ -668,6 +663,7 @@
     <string name="title_tile_lte">LTE</string>
     <string name="title_tile_mobiledata">Mobile data</string>
     <string name="title_tile_profile">Profile</string>
+    <string name="title_tile_performance_profile">Performance profile</string>
     <string name="title_tile_autorotate">Orientation</string>
     <string name="title_tile_settings">Settings</string>
     <string name="title_tile_sound">Sound</string>
