@@ -67,12 +67,9 @@
         <item>Singapur</item>
         <item>Brasilien</item>
     </string-array>
-
-    <!-- App ops permissions -->
-    <string-array name="app_ops_permissions">
-        <item>Erlauben</item>
-        <item>Verbieten</item>
-        <item>Nachfragen</item>
+    <string-array name="multi_sim_entries">
+        <item> Vertrag 1 </item>
+        <item> Vertrag 2 </item>
+        <item> Vertrag 3 </item>
     </string-array>
-
 </resources>

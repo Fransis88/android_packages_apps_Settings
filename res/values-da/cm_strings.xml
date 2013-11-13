@@ -213,9 +213,6 @@
     <string name="io_scheds_title">I/O-planlægger</string>
     <string name="io_sched_title">I/O-planlægger</string>
     <string name="perf_profile_title">Profil</string>
-    <string name="perf_profile_pwrsv">Strømbesparelse</string>
-    <string name="perf_profile_bal">Balanceret</string>
-    <string name="perf_profile_perf">Høj ydelse</string>
     <string name="memory_management_title">Hukommelsesstyring</string>
     <string name="pref_zram_title">zRam</string>
     <string name="pref_zram_summary">Komprimér hukommelse for øget virtuel kapacitet (kræver genstart)</string>
@@ -345,7 +342,6 @@
     <string name="button_settings">Knapper</string>
     <string name="headset_connect_player_title">Start musik-app ved tilslutning</string>
     <string name="headset_connect_player_summary">Start standard-app til musik, når headset tilsluttes</string>
-    <string name="hardware_keys_enable_custom_title">Aktivér brugerdefinerede handlinger</string>
     <string name="hardware_keys_home_key_title">Knappen Start</string>
     <string name="hardware_keys_menu_key_title">Knappen Menu</string>
     <string name="hardware_keys_assist_key_title">Knappen Søg</string>

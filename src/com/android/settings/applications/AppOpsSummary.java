@@ -181,8 +181,8 @@ public class AppOpsSummary extends Fragment {
     private void resetCountersConfirm() {
         new AlertDialog.Builder(getActivity())
             .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.appops_reset_confirm_title)
-            .setMessage(R.string.appops_reset_confirm_mesg)
+            .setTitle(R.string.app_ops_reset_confirm_title)
+            .setMessage(R.string.app_ops_reset_confirm_mesg)
             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()
                 {
                     @Override
