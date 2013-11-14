@@ -59,6 +59,7 @@ import com.android.internal.util.slim.ButtonsHelper;
 import com.android.internal.util.slim.ImageHelper;
 import com.android.internal.util.slim.DeviceUtils;
 import com.android.internal.util.slim.DeviceUtils.FilteredDeviceFeaturesArray;
+import com.android.internal.util.slim.PolicyHelper;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -503,6 +504,8 @@ public class ButtonsListViewSettings extends ListFragment implements
             case PIE_SECOND:
                 return ButtonsHelper.getPieSecondLayerConfigWithDescription(
                     mActivity, mActionValuesKey, mActionEntriesKey);
+            case LOCKSCREEN_SHORTCUT:
+                return ButtonsHelper.getLockscreenShortcutConfig(mActivity);
         }
         return null;
     }
@@ -520,6 +523,8 @@ public class ButtonsListViewSettings extends ListFragment implements
                 break;
             case PIE_SECOND:
                 ButtonsHelper.setPieSecondLayerConfig(mActivity, buttonConfigs, reset);
+            case LOCKSCREEN_SHORTCUT:
+                ButtonsHelper.setLockscreenShortcutConfig(mActivity, buttonConfigs, reset);
                 break;
         }
     }
