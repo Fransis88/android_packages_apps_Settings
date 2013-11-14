@@ -19,6 +19,9 @@
 
     <string name="ck_mod_version">CyanKang-Version</string>
 
+    <!-- CyanKang Settings -->
+    <string name="cyankang_settings">CyanKang Einstellungen/string>
+
     <!-- Advanced low battery indicator options -->
     <string name="pref_low_battery_warning_policy_title">Warnung bei niedrigem Batteriestand</string>
     <string name="pref_low_battery_warning_policy_dialog_title">Zeigt einen niedrigen Batteriestand an durch:</string>
