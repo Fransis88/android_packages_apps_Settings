@@ -39,6 +39,7 @@ import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers; 
 
@@ -63,6 +64,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_PIE_SETTINGS = "pie_settings";
     private static final String SHOW_CPU_INFO_KEY = "show_cpu_info";   
+    private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
 
     private ListPreference mNavigationBarHeight;
     private PreferenceScreen mPieControl;
@@ -99,6 +101,9 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktopNoNavbarPref =
                 (CheckBoxPreference) findPreference(KEY_EXPANDED_DESKTOP_NO_NAVBAR);
+
+        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
+                getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
 
         int expandedDesktopValue = Settings.System.getInt(getContentResolver(),
                 Settings.System.EXPANDED_DESKTOP_STYLE, 0);
