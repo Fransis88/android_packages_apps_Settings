@@ -67,17 +67,6 @@
         android:icon="@drawable/ic_settings_trds"
         android:title="@string/trds_settings_title" />
 
-    <!-- CYANKANG -->
-    <header android:title="@string/header_category_cyankang" />
-     
-    <!-- CyanKang Settings -->
-    <header
-        android:id="@+id/cyankang_settings"
-        android:icon="@drawable/ic_bt_config"
-        android:fragment="com.android.settings.cyankang.CyanKang"
-        android:title="@string/cyankang_settings" >
-    </header>
-
     <!-- Themes -->
     <header
         android:id="@+id/themes_settings"
@@ -87,6 +76,17 @@
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.tmobile.themechooser"
             android:targetClass="com.tmobile.themechooser.ThemeChooser" />
+    </header>
+
+    <!-- CYANKANG -->
+    <header android:title="@string/header_category_cyankang" />
+     
+    <!-- CyanKang Settings -->
+    <header
+        android:id="@+id/cyankang_settings"
+        android:icon="@drawable/ic_bt_config"
+        android:fragment="com.android.settings.cyankang.CyanKangSettings"
+        android:title="@string/cyankang_settings" >
     </header>
 
     <!-- DEVICE -->
