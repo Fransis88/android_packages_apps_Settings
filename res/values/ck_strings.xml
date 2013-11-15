@@ -29,6 +29,14 @@
     <!-- Settings Group: Tweaks -->
     <string name="tweaks_category">Tweaks</string>
 
+    <!-- General strings -->
+    <string name="ok">OK</string>
+    <string name="reset">Reset</string>
+    <string name="attention">Attention</string>
+    <string name="enabled">Enabled</string>
+    <string name="default_string">Default</string>
+    <string name="additional_options_title">Additional options</string>
+
     <!-- Advanced low battery indicator options -->
     <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
     <string name="pref_low_battery_warning_policy_dialog_title">Indicate low battery warning with</string>
