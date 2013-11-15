@@ -1729,6 +1729,11 @@
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
+        <activity
+            android:name=".cyankang.CyanKangSettings"
+            android:label="@string/cyankang_settings" >
+        </activity>
+
          <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
         <activity android:name="Settings$BlacklistSettingsActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
