@@ -19,9 +19,9 @@
     android:title="@string/cyankang_settings"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <!--PreferenceScreen
-        android:key="foo"
-        android:fragment="com.android.settings.cyankang.Bar"
-        android:title="@string/foo_bar_title" /-->
-    
+    <PreferenceScreen
+        android:key="status_bar"
+        android:fragment="com.android.settings.cyankang.StatusBarSettings"
+        android:title="@string/status_bar_title" />
+
 </PreferenceScreen>
