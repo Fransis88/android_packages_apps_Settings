@@ -1734,6 +1734,8 @@
             android:label="@string/cyankang_settings" >
         </activity>
 
+        <activity android:name=".cyankang.StatusBarTrafficColor" />
+
          <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
         <activity android:name="Settings$BlacklistSettingsActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"

@@ -22,10 +22,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
-import android.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -33,13 +33,34 @@ import com.android.settings.SettingsPreferenceFragment;
 public class CyanKangSettings extends SettingsPreferenceFragment implements
 Preference.OnPreferenceChangeListener {
     private static final String TAG = "CyanKangSettings";
-    
+
+    private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
+    private static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
+    private static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
+
+    private CheckBoxPreference mStatusBarTraffic_enable;
+    private CheckBoxPreference mStatusBarTraffic_hide;
+    private ListPreference mStatusBarTraffic_summary;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         addPreferencesFromResource(R.xml.cyankang_settings);
+        PreferenceScreen prefSet = getPreferenceScreen();
 
+        mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_ENABLE);
+        mStatusBarTraffic_enable.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 0) == 1));
+
+        mStatusBarTraffic_hide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_HIDE);
+        mStatusBarTraffic_hide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_TRAFFIC_HIDE, 1) == 1));
+
+        mStatusBarTraffic_summary = (ListPreference) findPreference(STATUS_BAR_TRAFFIC_SUMMARY);
+        mStatusBarTraffic_summary.setOnPreferenceChangeListener(this);
+        mStatusBarTraffic_summary.setValue((Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, 3000)) + "");
     }
 
     @Override
@@ -48,6 +69,30 @@ Preference.OnPreferenceChangeListener {
     }
     
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mStatusBarTraffic_summary) {
+            int val = Integer.valueOf((String) newValue);
+            int index = mStatusBarTraffic_summary.findIndexOfValue((String) newValue);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, val);
+            mStatusBarTraffic_summary.setSummary(mStatusBarTraffic_summary.getEntries()[index]);
+            return true;
+        }
         return false;
+    }
+
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean value;
+
+        if (preference == mStatusBarTraffic_enable) {
+            value = mStatusBarTraffic_enable.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRAFFIC_ENABLE, value ? 1 : 0);
+        } else if (preference == mStatusBarTraffic_hide) {
+            value = mStatusBarTraffic_hide.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
+        }
+        return true;
     }
 }
