@@ -76,6 +76,8 @@ Preference.OnPreferenceChangeListener {
         mStatusBarNetStatsUpdate.setValue(String.valueOf(statsUpdate));
         mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntry());
         mStatusBarNetStatsUpdate.setOnPreferenceChangeListener(this);
+
+        mStatusBarTraffic_summary.setEnabled(!mStatusBarNetworkStats.isChecked());
     }
 
     @Override
@@ -118,6 +120,7 @@ Preference.OnPreferenceChangeListener {
             value = mStatusBarNetworkStats.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
+            mStatusBarTraffic_summary.setEnabled(!value);
         }
         return true;
     }
