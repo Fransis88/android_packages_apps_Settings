@@ -53,6 +53,8 @@ Preference.OnPreferenceChangeListener {
         addPreferencesFromResource(R.xml.cyankang_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
 
+        ContentResolver resolver = getActivity().getContentResolver();
+
         mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_ENABLE);
         mStatusBarTraffic_enable.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 0) == 1));
@@ -86,7 +88,6 @@ Preference.OnPreferenceChangeListener {
     }
     
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mStatusBarTraffic_summary) {
             int val = Integer.valueOf((String) newValue);
             int index = mStatusBarTraffic_summary.findIndexOfValue((String) newValue);
