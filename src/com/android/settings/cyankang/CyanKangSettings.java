@@ -37,10 +37,14 @@ Preference.OnPreferenceChangeListener {
     private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
     private static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
     private static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
+    private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
+    private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
 
     private CheckBoxPreference mStatusBarTraffic_enable;
     private CheckBoxPreference mStatusBarTraffic_hide;
     private ListPreference mStatusBarTraffic_summary;
+    private ListPreference mStatusBarNetStatsUpdate;
+    private CheckBoxPreference mStatusBarNetworkStats;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,17 @@ Preference.OnPreferenceChangeListener {
         mStatusBarTraffic_summary.setOnPreferenceChangeListener(this);
         mStatusBarTraffic_summary.setValue((Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, 3000)) + "");
+
+        mStatusBarNetworkStats = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS);
+        mStatusBarNetStatsUpdate = (ListPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS_UPDATE);
+        mStatusBarNetworkStats.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1));
+
+        long statsUpdate = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500);
+        mStatusBarNetStatsUpdate.setValue(String.valueOf(statsUpdate));
+        mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntry());
+        mStatusBarNetStatsUpdate.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -75,6 +90,13 @@ Preference.OnPreferenceChangeListener {
             int index = mStatusBarTraffic_summary.findIndexOfValue((String) newValue);
             Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, val);
             mStatusBarTraffic_summary.setSummary(mStatusBarTraffic_summary.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarNetStatsUpdate) {
+            long updateInterval = Long.valueOf((String) newValue);
+            int index = mStatusBarNetStatsUpdate.findIndexOfValue((String) newValue);
+            Settings.System.putLong(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, updateInterval);
+            mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntries()[index]);
             return true;
         }
         return false;
@@ -92,6 +114,10 @@ Preference.OnPreferenceChangeListener {
             value = mStatusBarTraffic_hide.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
+        } else if (preference == mStatusBarNetworkStats) {
+            value = mStatusBarNetworkStats.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
         }
         return true;
     }

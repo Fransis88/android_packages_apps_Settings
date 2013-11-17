@@ -108,4 +108,8 @@
     <string name="network_speed_color_reset">Reset</string>
     <string name="network_speed_color_summary">Change the color of network speed indicator</string>
 
+    <string name="status_bar_network_title">Network traffic</string>
+    <string name="status_bar_show_network_stats_title">Show network speeds</string>
+    <string name="status_bar_network_stats_update_title">Update frequency</string>
+
 </resources>
