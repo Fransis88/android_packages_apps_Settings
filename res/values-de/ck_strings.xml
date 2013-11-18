@@ -19,6 +19,9 @@
 
     <string name="ck_mod_version">CyanKang-Version</string>
 
+    <!-- CyanKang Settings -->
+    <string name="cyankang_settings">CyanKang Einstellungen</string>
+
     <!-- TRDS Settings -->
     <string name="trds_settings_title">Dark UI (TRDS)</string>
 

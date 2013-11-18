@@ -70,6 +70,17 @@
         android:fragment="org.omnirom.omnigears.BarsAndMenusSettings"
         android:icon="@drawable/ic_menu_add" />
 
+    <!-- CYANKANG -->
+    <header android:title="@string/header_category_cyankang" />
+     
+    <!-- CyanKang Settings -->
+    <header
+        android:id="@+id/cyankang_settings"
+        android:icon="@drawable/ic_bt_config"
+        android:fragment="com.android.settings.cyankang.CyanKang"
+        android:title="@string/cyankang_settings" >
+    </header>
+
     <!-- TRDS -->
     <header
         android:id="@+id/trds_settings"
