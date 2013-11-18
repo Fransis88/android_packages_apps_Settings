@@ -51,12 +51,18 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="navigation_bar"
         android:title="@string/navigation_bar_category">
 
         <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.omnikang.NavBar"
             android:title="@string/navigation_bar_title" />
+
+        <PreferenceScreen
+            android:key="navigation_ring"
+            android:fragment="com.android.settings.omnikang.NavRing"
+            android:title="@string/navigation_ring_title" />
 
     </PreferenceCategory>
 

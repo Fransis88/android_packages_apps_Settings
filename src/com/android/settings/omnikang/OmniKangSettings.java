@@ -44,6 +44,8 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
     private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
 
+    private static final String CATEGORY_NAVBAR = "navigation_bar";
+
     private CheckBoxPreference mStatusBarTraffic_enable;
     private CheckBoxPreference mStatusBarTraffic_hide;
     private ListPreference mStatusBarTraffic_summary;
@@ -85,6 +87,15 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
 
         mStatusBarTraffic_summary.setEnabled(!mStatusBarNetworkStats.isChecked());
 
+        try {
+            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
+            // Hide navigation bar category on devices without navigation bar
+            if (!hasNavBar) {
+                prefScreen.removePreference(findPreference(CATEGORY_NAVBAR));
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error getting navigation bar status");
+        }
     }
 
     @Override
