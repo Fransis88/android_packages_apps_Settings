@@ -38,7 +38,7 @@ Preference.OnPreferenceChangeListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        addPreferencesFromResource(R.xml.beerbar_settings);
+        addPreferencesFromResource(R.xml.cyankang_settings);
 
     }
 
