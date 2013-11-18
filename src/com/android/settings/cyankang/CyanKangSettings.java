@@ -122,8 +122,8 @@ public class CyanKangSettings extends SettingsPreferenceFragment implements
             mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntries()[index]);
             return true;
         } else if (preference == mLowBatteryWarning) {
-            int lowBatteryWarning = Integer.valueOf((String) objValue);
-            int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
+            int lowBatteryWarning = Integer.valueOf((String) newValue);
+            int index = mLowBatteryWarning.findIndexOfValue((String) newValue);
             Settings.System.putInt(resolver, Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY,
                     lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);

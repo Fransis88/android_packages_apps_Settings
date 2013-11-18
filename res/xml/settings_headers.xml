@@ -77,7 +77,7 @@
     <header
         android:id="@+id/cyankang_settings"
         android:icon="@drawable/ic_bt_config"
-        android:fragment="com.android.settings.cyankang.CyanKang"
+        android:fragment="com.android.settings.cyankang.CyanKangSettings"
         android:title="@string/cyankang_settings" >
     </header>
 
