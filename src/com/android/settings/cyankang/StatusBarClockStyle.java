@@ -92,7 +92,7 @@ implements OnPreferenceChangeListener {
         mClockStyle = (ListPreference) findPreference(PREF_ENABLE);
         mClockStyle.setOnPreferenceChangeListener(this);
         mClockStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
-               .getContentResolver(), Settings.System.STATUSBAR_CLOCK_STYLE, 0)));
+               .getContentResolver(), Settings.System.STATUSBAR_CLOCK_STYLE, 2)));
         mClockStyle.setSummary(mClockStyle.getEntry());
 
         mClockAmPmStyle = (ListPreference) prefSet.findPreference(PREF_AM_PM_STYLE);
