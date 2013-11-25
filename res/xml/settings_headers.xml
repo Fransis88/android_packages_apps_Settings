@@ -62,13 +62,19 @@
     <header android:id="@+id/interface_section"
         android:title="@string/header_category_interface" />
 
-    <!-- Themes -->
     <header
         android:id="@+id/bars_and_menus"
         android:title="@string/bars_and_menus_settings"
         android:breadCrumbTitle="@string/bars_and_menus_settings"
         android:fragment="org.omnirom.omnigears.BarsAndMenusSettings"
         android:icon="@drawable/ic_menu_add" />
+
+    <header
+        android:id="@+id/active_display"
+        android:title="@string/active_display_settings"
+        android:breadCrumbTitle="@string/active_display_settings"
+        android:fragment="org.omnirom.omnigears.chameleonos.ActiveDisplaySettings"
+        android:icon="@drawable/ic_settings_actived" />
 
     <!-- CYANKANG -->
     <header android:title="@string/header_category_cyankang" />
