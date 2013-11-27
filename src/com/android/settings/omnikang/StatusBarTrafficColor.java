@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.android.settings.cyankang;
+package com.android.settings.omnikang;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;

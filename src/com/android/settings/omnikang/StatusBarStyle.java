@@ -16,7 +16,7 @@
 
 
 
-package com.android.settings.cyankang;
+package com.android.settings.omnikang;
 
 import android.content.res.Resources;
 import android.os.Bundle;

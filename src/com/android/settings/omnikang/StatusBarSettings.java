@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 CyanKang
+ * Copyright (C) 2013 OmniKang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.cyankang;
+package com.android.settings.omnikang;
 
 import android.app.ActivityManager;
 import android.content.Context;

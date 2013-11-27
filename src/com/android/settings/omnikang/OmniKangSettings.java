@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 CyanKang
+ * Copyright (C) 2013 OmniKang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.cyankang;
+package com.android.settings.omnikang;
 
 import android.app.ActivityManager;
 import android.content.ContentResolver;
@@ -34,9 +34,9 @@ import android.view.WindowManagerGlobal;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class CyanKangSettings extends SettingsPreferenceFragment implements
+public class OmniKangSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CyanKangSettings";
+    private static final String TAG = "OmniKangSettings";
 
     private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
     private static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
@@ -54,7 +54,7 @@ public class CyanKangSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        addPreferencesFromResource(R.xml.cyankang_settings);
+        addPreferencesFromResource(R.xml.omnikang_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
 
         ContentResolver resolver = getActivity().getContentResolver();
