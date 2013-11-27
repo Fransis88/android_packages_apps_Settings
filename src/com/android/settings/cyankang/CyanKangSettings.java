@@ -150,6 +150,9 @@ public class CyanKangSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
             mStatusBarTraffic_summary.setEnabled(!value);
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     }
