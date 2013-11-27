@@ -50,7 +50,7 @@ OnPreferenceChangeListener {
         mQuickPulldown.setOnPreferenceChangeListener(this);
         int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext()
                                                         .getContentResolver(),
-                                                        Settings.System.QS_QUICK_PULLDOWN, 2);
+                                                        Settings.System.QS_QUICK_PULLDOWN, 0);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
         updatePulldownSummary(quickPulldownValue);
     }
