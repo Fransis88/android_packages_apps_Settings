@@ -1615,6 +1615,7 @@
         </activity>
 
         <activity android:name=".omnikang.Halo" />
+        <activity android:name=".omnikang.NotificationDrawerStyle" />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"

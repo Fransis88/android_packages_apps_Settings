@@ -40,6 +40,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/notification_drawer_title">
+
+        <Preference
+            android:fragment="com.android.settings.omnikang.NotificationDrawerStyle"
+            android:key="notification_style"
+            android:title="@string/notification_style_title"
+            android:summary="@string/notification_style_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/navigation_bar_category">
 
         <PreferenceScreen
