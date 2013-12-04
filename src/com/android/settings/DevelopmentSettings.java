@@ -556,6 +556,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Secure.putInt(getActivity().getContentResolver(),
                 Settings.Secure.DEVELOPMENT_SHORTCUT,
                 mDevelopmentShortcut.isChecked() ? 1 : 0);
+    }
 
     private void updateDevelopmentShortcutOptions() {
         mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
