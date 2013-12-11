@@ -46,7 +46,7 @@ import com.android.internal.util.cm.LockscreenTargetUtils;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
 import com.android.settings.R;
-import com.android.settings.cyanogenmod.IconPicker.OnIconPickListener;
+import com.android.settings.omnikang.IconPicker.OnIconPickListener;
 
 import java.io.File;
 import java.io.IOException;

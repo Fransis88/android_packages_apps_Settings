@@ -41,7 +41,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.cyanogenmod.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
+import com.android.settings.omnikang.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
 
 public class ShortcutPickHelper {
 
