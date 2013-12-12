@@ -21,6 +21,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -91,7 +92,7 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
             // Hide navigation bar category on devices without navigation bar
             if (!hasNavBar) {
-                prefScreen.removePreference(findPreference(CATEGORY_NAVBAR));
+                prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Error getting navigation bar status");

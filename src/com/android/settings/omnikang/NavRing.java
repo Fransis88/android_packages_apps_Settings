@@ -189,7 +189,7 @@ public class NavRing extends Fragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_RESET, 0, R.string.profile_reset_title)
+        menu.add(0, MENU_RESET, 0, R.string.reset)
             .setIcon(R.drawable.ic_settings_backup)
             .setAlphabeticShortcut('r')
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
