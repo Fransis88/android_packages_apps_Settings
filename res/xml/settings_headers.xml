@@ -81,7 +81,7 @@
         android:title="@string/interface_notification_panel_title"
         android:breadCrumbTitle="@string/interface_notification_panel_title"
         android:fragment="org.omnirom.omnigears.interfacesettings.NotificationPanelSettings"
-        android:icon="@drawable/ic_notifications" />
+        android:icon="@drawable/ic_notif_drawer" />
 
     <header
         android:id="@+id/active_display"
