@@ -1720,6 +1720,11 @@
             android:label="@string/omnikang_settings" >
         </activity>
 
+        <activity
+            android:name=".slim.themes.ThemeSettings"
+            android:label="@string/theme_settings_title" >
+        </activity>
+
         <activity android:name=".omnikang.Halo" />
         <activity android:name=".omnikang.NotificationDrawerStyle" />
         <activity android:name=".omnikang.LockscreenTargets" />
