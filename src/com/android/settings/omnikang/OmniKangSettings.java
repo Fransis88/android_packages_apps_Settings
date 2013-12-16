@@ -88,14 +88,10 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
 
         mStatusBarTraffic_summary.setEnabled(!mStatusBarNetworkStats.isChecked());
 
-        try {
-            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
-            // Hide navigation bar category on devices without navigation bar
-            if (!hasNavBar) {
-                prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error getting navigation bar status");
+        boolean hasNavBar = getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+        // Hide navigation bar category on devices without navigation bar
+        if (!hasNavBar) {
+            prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
         }
     }
 

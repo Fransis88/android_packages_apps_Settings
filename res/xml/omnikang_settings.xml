@@ -55,6 +55,11 @@
         android:title="@string/navigation_bar_category">
 
         <PreferenceScreen
+            android:key="navigation_bar_dimen"
+            android:fragment="com.android.settings.omnikang.NavBarDimen"
+            android:title="@string/navbar_dimen_title" />
+
+        <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.omnikang.NavBar"
             android:title="@string/navigation_bar_title" />
