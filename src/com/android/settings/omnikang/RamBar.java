@@ -103,6 +103,7 @@ public class RamBar extends SettingsPreferenceFragment implements OnPreferenceCh
 
     }
 
+/*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -119,7 +120,7 @@ public class RamBar extends SettingsPreferenceFragment implements OnPreferenceCh
                 return super.onContextItemSelected(item);
         }
     }
-
+*/
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
 
