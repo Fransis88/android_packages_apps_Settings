@@ -125,18 +125,23 @@
         <PreferenceScreen
             android:fragment="com.android.settings.omnikang.StatusBarTrafficColor"
             android:key="status_bar_traffic_color"
-               android:title="@string/network_speed_color_title"
+            android:title="@string/network_speed_color_title"
             android:dependency="status_bar_traffic_enable"
             android:summary="@string/network_speed_color_summary" />
 
     </PreferenceCategory>
 
-<!--
     <PreferenceCategory
         android:key="tweaks_category"
         android:title="@string/tweaks_category" >
 
+        <!-- Ram Bar -->
+        <PreferenceScreen
+            android:key="ram_bar"
+            android:fragment="com.android.settings.omnikang.RamBar"
+            android:title="@string/ram_bar_title"
+            android:summary="@string/ram_bar_summary" />
+
     </PreferenceCategory>
--->
 
 </PreferenceScreen>
