@@ -108,12 +108,6 @@
         android:title="@string/omnikang_settings" >
     </header>
 
-    <!-- TRDS -->
-    <header
-        android:id="@+id/trds_settings"
-        android:icon="@drawable/ic_settings_trds"
-        android:title="@string/trds_settings_title" />
-
     <!-- HALO -->
     <header
         android:id="@+id/halo_settings"

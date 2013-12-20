@@ -40,9 +40,6 @@
     <string name="default_string">Default</string>
     <string name="additional_options_title">Additional options</string>
 
-    <!-- TRDS Settings -->
-    <string name="trds_settings_title">Dark UI (TRDS)</string>
-
     <!-- Quick settings -->
     <string name="quick_pulldown_title">Quick Settings pulldown</string>
     <string name="quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
