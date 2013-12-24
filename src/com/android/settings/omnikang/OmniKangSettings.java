@@ -39,6 +39,9 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "OmniKangSettings";
 
+    private static final String QS_QUICK_ACCESS = "qs_quick_access";
+    private static final String QS_QUICK_ACCESS_LINKED = "qs_quick_access_linked";
+
     private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
     private static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
     private static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
@@ -46,6 +49,9 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
 
     private static final String CATEGORY_NAVBAR = "navigation_bar";
+
+    private CheckBoxPreference mQSQuickAccess;
+    private CheckBoxPreference mQSQuickAccess_linked;
 
     private CheckBoxPreference mStatusBarTraffic_enable;
     private CheckBoxPreference mStatusBarTraffic_hide;
@@ -61,6 +67,14 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         PreferenceScreen prefSet = getPreferenceScreen();
 
         ContentResolver resolver = getActivity().getContentResolver();
+
+        mQSQuickAccess = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS);
+        mQSQuickAccess.setChecked((Settings.System.getInt(resolver,
+                Settings.System.QS_QUICK_ACCESS, 0) == 1));
+
+        mQSQuickAccess_linked = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS_LINKED);
+        mQSQuickAccess_linked.setChecked((Settings.System.getInt(resolver,
+                Settings.System.QS_QUICK_ACCESS_LINKED, 0) == 1));
 
         mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_ENABLE);
         mStatusBarTraffic_enable.setChecked((Settings.System.getInt(resolver,
@@ -138,6 +152,14 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             value = mStatusBarTraffic_hide.isChecked();
             Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
+        } else if (preference == mQSQuickAccess) {
+            value = mQSQuickAccess.isChecked();
+            Settings.System.putInt(resolver,
+                    Settings.System.QS_QUICK_ACCESS, value ? 1 : 0);
+        } else if (preference == mQSQuickAccess_linked) {
+            value = mQSQuickAccess_linked.isChecked();
+            Settings.System.putInt(resolver,
+                    Settings.System.QS_QUICK_ACCESS_LINKED, value ? 1 : 0);
         } else if (preference == mStatusBarNetworkStats) {
             value = mStatusBarNetworkStats.isChecked();
             Settings.System.putInt(resolver,

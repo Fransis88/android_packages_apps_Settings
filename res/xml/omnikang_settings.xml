@@ -48,6 +48,19 @@
             android:title="@string/notification_style_title"
             android:summary="@string/notification_style_summary" />
 
+        <CheckBoxPreference
+            android:key="qs_quick_access"
+            android:title="@string/title_quick_access"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="qs_quick_access_linked"
+            android:title="@string/title_quick_access_linked"
+            android:summary="@string/summary_quick_access_linked"
+            android:defaultValue="true"
+            android:dependency="qs_quick_access"
+            android:disableDependentsState="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
