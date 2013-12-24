@@ -48,6 +48,11 @@
             android:title="@string/notification_style_title"
             android:summary="@string/notification_style_summary" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/category_quick_access">
+
         <CheckBoxPreference
             android:key="qs_quick_access"
             android:title="@string/title_quick_access"

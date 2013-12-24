@@ -33,6 +33,7 @@ import android.util.Log;
 import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
+import com.android.settings.util.Helpers;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class OmniKangSettings extends SettingsPreferenceFragment implements
@@ -156,6 +157,7 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             value = mQSQuickAccess.isChecked();
             Settings.System.putInt(resolver,
                     Settings.System.QS_QUICK_ACCESS, value ? 1 : 0);
+            Helpers.restartSystemUI();
         } else if (preference == mQSQuickAccess_linked) {
             value = mQSQuickAccess_linked.isChecked();
             Settings.System.putInt(resolver,
