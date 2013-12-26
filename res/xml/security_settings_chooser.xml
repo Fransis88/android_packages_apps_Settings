@@ -31,6 +31,10 @@
             android:title="@string/security_enable_widgets_title"/>
 
         <CheckBoxPreference
+            android:key="keyguard_enable_camera"
+            android:title="@string/lockscreen_enable_camera_title" />
+
+        <CheckBoxPreference
             android:key="lockscreen_maximize_widgets"
             android:title="@string/security_maximize_widgets_title"
             android:persistent="false"/>

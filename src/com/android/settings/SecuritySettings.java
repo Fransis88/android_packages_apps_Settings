@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -67,6 +68,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+    private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
     private static final String KEY_SEE_TRHOUGH = "see_through";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
@@ -113,6 +115,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
     private CheckBoxPreference mEnableKeyguardWidgets;
+    private CheckBoxPreference mEnableCameraWidget;
     private CheckBoxPreference mSeeThrough;
 
     private Preference mNotificationAccess;
@@ -319,6 +322,27 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
+        // Enable or disable camera widget based on device and policy
+        mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                Camera.getNumberOfCameras() == 0) {
+            PreferenceGroup securityCategory
+                    = (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
+            if (securityCategory != null) {
+                securityCategory.removePreference(mEnableCameraWidget);
+                mEnableCameraWidget = null;
+            }
+        } else {
+            final boolean disabled = (0 != (mDPM.getKeyguardDisabledFeatures(null)
+                    & DevicePolicyManager.KEYGUARD_DISABLE_SECURE_CAMERA));
+            if (disabled) {
+                mEnableKeyguardWidgets.setSummary(
+                        R.string.security_enable_widgets_disabled_summary);
+            } else {
+                mEnableKeyguardWidgets.setSummary("");
+            }
+            mEnableKeyguardWidgets.setEnabled(!disabled);
+        }
 
         mQuickUnlockScreen = (CheckBoxPreference) root.findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
         if (mQuickUnlockScreen  != null) {
@@ -567,6 +591,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mEnableKeyguardWidgets != null) {
             mEnableKeyguardWidgets.setChecked(lockPatternUtils.getWidgetsEnabled());
         }
+
+        if (mEnableCameraWidget != null) {
+            mEnableCameraWidget.setChecked(mLockPatternUtils.getCameraEnabled());
+        }
     }
 
     @Override
@@ -619,6 +647,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
         } else if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+        } else if (KEY_ENABLE_CAMERA.equals(key)) {
+            mLockPatternUtils.setCameraEnabled(mEnableCameraWidget.isChecked());
         } else if (preference == mLockRingBattery) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, isToggled(preference) ? 1 : 0);
@@ -712,4 +742,5 @@ public class SecuritySettings extends RestrictedSettingsFragment
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
         startActivity(intent);
     }
+
 }
