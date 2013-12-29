@@ -43,22 +43,10 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     private static final String QS_QUICK_ACCESS = "qs_quick_access";
     private static final String QS_QUICK_ACCESS_LINKED = "qs_quick_access_linked";
 
-    private static final String STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
-    private static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
-    private static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
-    private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
-    private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
-
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
     private CheckBoxPreference mQSQuickAccess;
     private CheckBoxPreference mQSQuickAccess_linked;
-
-    private CheckBoxPreference mStatusBarTraffic_enable;
-    private CheckBoxPreference mStatusBarTraffic_hide;
-    private ListPreference mStatusBarTraffic_summary;
-    private ListPreference mStatusBarNetStatsUpdate;
-    private CheckBoxPreference mStatusBarNetworkStats;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,32 +64,6 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         mQSQuickAccess_linked = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS_LINKED);
         mQSQuickAccess_linked.setChecked((Settings.System.getInt(resolver,
                 Settings.System.QS_QUICK_ACCESS_LINKED, 0) == 1));
-
-        mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_ENABLE);
-        mStatusBarTraffic_enable.setChecked((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 0) == 1));
-
-        mStatusBarTraffic_hide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC_HIDE);
-        mStatusBarTraffic_hide.setChecked((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TRAFFIC_HIDE, 1) == 1));
-
-        mStatusBarTraffic_summary = (ListPreference) findPreference(STATUS_BAR_TRAFFIC_SUMMARY);
-        mStatusBarTraffic_summary.setOnPreferenceChangeListener(this);
-        mStatusBarTraffic_summary.setValue((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, 3000)) + "");
-
-        mStatusBarNetworkStats = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS);
-        mStatusBarNetStatsUpdate = (ListPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS_UPDATE);
-        mStatusBarNetworkStats.setChecked((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1));
-
-        long statsUpdate = Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500);
-        mStatusBarNetStatsUpdate.setValue(String.valueOf(statsUpdate));
-        mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntry());
-        mStatusBarNetStatsUpdate.setOnPreferenceChangeListener(this);
-
-        mStatusBarTraffic_summary.setEnabled(!mStatusBarNetworkStats.isChecked());
 
         boolean hasNavBar = getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
         // Hide navigation bar category on devices without navigation bar
@@ -123,20 +85,6 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
 
-        if (preference == mStatusBarTraffic_summary) {
-            int val = Integer.valueOf((String) newValue);
-            int index = mStatusBarTraffic_summary.findIndexOfValue((String) newValue);
-            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, val);
-            mStatusBarTraffic_summary.setSummary(mStatusBarTraffic_summary.getEntries()[index]);
-            return true;
-        } else if (preference == mStatusBarNetStatsUpdate) {
-            long updateInterval = Long.valueOf((String) newValue);
-            int index = mStatusBarNetStatsUpdate.findIndexOfValue((String) newValue);
-            Settings.System.putLong(resolver,
-                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, updateInterval);
-            mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntries()[index]);
-            return true;
-        }
         return false;
     }
 
@@ -145,15 +93,7 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
         boolean value;
 
-        if (preference == mStatusBarTraffic_enable) {
-            value = mStatusBarTraffic_enable.isChecked();
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_TRAFFIC_ENABLE, value ? 1 : 0);
-        } else if (preference == mStatusBarTraffic_hide) {
-            value = mStatusBarTraffic_hide.isChecked();
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
-        } else if (preference == mQSQuickAccess) {
+        if (preference == mQSQuickAccess) {
             value = mQSQuickAccess.isChecked();
             Settings.System.putInt(resolver,
                     Settings.System.QS_QUICK_ACCESS, value ? 1 : 0);
@@ -162,11 +102,6 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             value = mQSQuickAccess_linked.isChecked();
             Settings.System.putInt(resolver,
                     Settings.System.QS_QUICK_ACCESS_LINKED, value ? 1 : 0);
-        } else if (preference == mStatusBarNetworkStats) {
-            value = mStatusBarNetworkStats.isChecked();
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
-            mStatusBarTraffic_summary.setEnabled(!value);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

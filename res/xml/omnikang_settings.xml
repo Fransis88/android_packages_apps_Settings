@@ -37,6 +37,11 @@
             android:fragment="com.android.settings.omnikang.StatusBarStyle"
             android:title="@string/status_bar_style_title" />
 
+        <PreferenceScreen
+            android:key="status_bar_traffic"
+            android:fragment="com.android.settings.omnikang.StatusBarTraffic"
+            android:title="@string/status_bar_network_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -120,55 +125,6 @@
             android:title="@string/tile_picker_title"
             android:summary="@string/tile_picker_summary"
             android:fragment="com.android.settings.slim.quicksettings.QuickSettingsTiles" />
-
-    </PreferenceCategory>
-
-    <!-- Network Speed Indicator -->
-    <PreferenceCategory
-        android:title="@string/status_bar_network_title">
-
-        <CheckBoxPreference
-            android:key="status_bar_traffic_enable"
-            android:title="@string/enable_network_speed"
-            android:summary="@string/enable_network_speed_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
-            android:key="status_bar_show_network_stats"
-            android:title="@string/status_bar_show_network_stats_title"
-            android:summary="@string/status_bar_show_network_stats_summary"
-            android:dependency="status_bar_traffic_enable"
-            android:defaultValue="false" />
-
-        <ListPreference
-            android:key="status_bar_network_status_update"
-            android:dialogTitle="@string/status_bar_network_stats_update_title"
-            android:title="@string/status_bar_network_stats_update_title"
-            android:entries="@array/entries_status_bar_network_stats_update"
-            android:entryValues="@array/values_status_bar_network_stats_update"
-            android:dependency="status_bar_traffic_enable" />
-
-        <CheckBoxPreference
-            android:key="status_bar_traffic_hide"
-            android:title="@string/hide_network_speed"
-            android:summary="@string/hide_network_speed_summary"
-            android:dependency="status_bar_traffic_enable"
-            android:defaultValue="true" />
-
-        <ListPreference
-            android:key="status_bar_traffic_summary"
-            android:dialogTitle="@string/network_speed_summary"
-            android:title="@string/network_speed_summary"
-            android:entries="@array/network_speed_summary_entries"
-            android:dependency="status_bar_traffic_enable"
-            android:entryValues="@array/network_speed_summary_values" />
-
-        <PreferenceScreen
-            android:fragment="com.android.settings.omnikang.StatusBarTrafficColor"
-            android:key="status_bar_traffic_color"
-            android:title="@string/network_speed_color_title"
-            android:dependency="status_bar_traffic_enable"
-            android:summary="@string/network_speed_color_summary" />
 
     </PreferenceCategory>
 
