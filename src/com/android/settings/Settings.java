@@ -1115,7 +1115,6 @@ public class Settings extends PreferenceActivity
     public static class MenusSettingsActivity extends Settings { /* empty */ }
     public static class NotificationPanelSettingsActivity extends Settings { /* empty */ }
     public static class MoreInterfaceSettingsActivity extends Settings { /* empty */ }
-    public static class ActiveDisplaySettingsActivity extends Settings { /* empty */ }
     public static class DisplaySettingsActivity extends Settings { /* empty */ }
     public static class DeviceInfoSettingsActivity extends Settings { /* empty */ }
     public static class ApplicationSettingsActivity extends Settings { /* empty */ }
