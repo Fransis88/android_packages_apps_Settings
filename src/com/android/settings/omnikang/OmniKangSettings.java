@@ -34,21 +34,16 @@ import android.util.Log;
 import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
-import com.android.settings.util.Helpers;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class OmniKangSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "OmniKangSettings";
 
-    private static final String QS_QUICK_ACCESS = "qs_quick_access";
-    private static final String QS_QUICK_ACCESS_LINKED = "qs_quick_access_linked";
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
 
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
-    private CheckBoxPreference mQSQuickAccess;
-    private CheckBoxPreference mQSQuickAccess_linked;
     private CheckBoxPreference mReverseDefaultAppPicker;
 
     @Override
@@ -59,14 +54,6 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         PreferenceScreen prefSet = getPreferenceScreen();
 
         ContentResolver resolver = getActivity().getContentResolver();
-
-        mQSQuickAccess = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS);
-        mQSQuickAccess.setChecked((Settings.System.getInt(resolver,
-                Settings.System.QS_QUICK_ACCESS, 0) == 1));
-
-        mQSQuickAccess_linked = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS_LINKED);
-        mQSQuickAccess_linked.setChecked((Settings.System.getInt(resolver,
-                Settings.System.QS_QUICK_ACCESS_LINKED, 0) == 1));
 
         mReverseDefaultAppPicker = (CheckBoxPreference) findPreference(KEY_REVERSE_DEFAULT_APP_PICKER);
         mReverseDefaultAppPicker.setChecked(Settings.System.getInt(resolver,
@@ -104,16 +91,7 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
         boolean value;
 
-        if (preference == mQSQuickAccess) {
-            value = mQSQuickAccess.isChecked();
-            Settings.System.putInt(resolver,
-                    Settings.System.QS_QUICK_ACCESS, value ? 1 : 0);
-            Helpers.restartSystemUI();
-        } else if (preference == mQSQuickAccess_linked) {
-            value = mQSQuickAccess_linked.isChecked();
-            Settings.System.putInt(resolver,
-                    Settings.System.QS_QUICK_ACCESS_LINKED, value ? 1 : 0);
-        } else if (preference == mReverseDefaultAppPicker) {
+        if (preference == mReverseDefaultAppPicker) {
             Settings.System.putInt(resolver, Settings.System.REVERSE_DEFAULT_APP_PICKER,
                     mReverseDefaultAppPicker.isChecked() ? 1 : 0);
         } else {
