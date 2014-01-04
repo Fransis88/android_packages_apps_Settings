@@ -84,13 +84,6 @@
         android:icon="@drawable/ic_notif_drawer" />
 
     <header
-        android:id="@+id/interface_animation"
-        android:title="@string/interface_animation_title"
-        android:breadCrumbTitle="@string/interface_animation_title"
-        android:fragment="org.omnirom.omnigears.interfacesettings.AnimationInterfaceSettings"
-        android:icon="@drawable/ic_rom_control_animations" />
-
-    <header
         android:id="@+id/active_display"
         android:title="@string/active_display_settings"
         android:breadCrumbTitle="@string/active_display_settings"
