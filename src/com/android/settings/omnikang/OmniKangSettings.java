@@ -43,11 +43,13 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
 
     private static final String QS_QUICK_ACCESS = "qs_quick_access";
     private static final String QS_QUICK_ACCESS_LINKED = "qs_quick_access_linked";
+    private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
 
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
     private CheckBoxPreference mQSQuickAccess;
     private CheckBoxPreference mQSQuickAccess_linked;
+    private CheckBoxPreference mReverseDefaultAppPicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,10 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         mQSQuickAccess_linked = (CheckBoxPreference) prefSet.findPreference(QS_QUICK_ACCESS_LINKED);
         mQSQuickAccess_linked.setChecked((Settings.System.getInt(resolver,
                 Settings.System.QS_QUICK_ACCESS_LINKED, 0) == 1));
+
+        mReverseDefaultAppPicker = (CheckBoxPreference) findPreference(KEY_REVERSE_DEFAULT_APP_PICKER);
+        mReverseDefaultAppPicker.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.REVERSE_DEFAULT_APP_PICKER, 0) != 0);
 
         boolean hasNavBar = getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
@@ -107,6 +113,9 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             value = mQSQuickAccess_linked.isChecked();
             Settings.System.putInt(resolver,
                     Settings.System.QS_QUICK_ACCESS_LINKED, value ? 1 : 0);
+        } else if (preference == mReverseDefaultAppPicker) {
+            Settings.System.putInt(resolver, Settings.System.REVERSE_DEFAULT_APP_PICKER,
+                    mReverseDefaultAppPicker.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

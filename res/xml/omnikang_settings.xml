@@ -144,6 +144,11 @@
             android:title="@string/ram_bar_title"
             android:summary="@string/ram_bar_summary" />
 
+        <CheckBoxPreference
+            android:key="reverse_default_app_picker"
+            android:title="@string/reverse_default_app_picker"
+            android:summary="@string/reverse_default_app_picker_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
