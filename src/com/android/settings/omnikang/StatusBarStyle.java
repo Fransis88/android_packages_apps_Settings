@@ -80,7 +80,7 @@ OnPreferenceChangeListener {
             updatePulldownSummary(quickPulldownValue);
             return true;
         } else if (preference == mCollapsePanel) {
-            Settings.System.putInt(getContentResolver(), Settings.System.QS_COLLAPSE_PANEL, (Boolean) newValue ? 1 : 0);
+            Settings.System.putInt(getContentResolver(), Settings.System.QS_COLLAPSE_PANEL, (Boolean) objValue ? 1 : 0);
             return true;
         }
         return false;
