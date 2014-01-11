@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-
-
 package com.android.settings.omnikang;
 
 import android.content.res.Resources;
@@ -36,8 +34,10 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
 OnPreferenceChangeListener {
     
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String PRE_COLLAPSE_PANEL = "collapse_panel";
 
     private ListPreference mQuickPulldown;
+    CheckBoxPreference mCollapsePanel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,11 @@ OnPreferenceChangeListener {
                                                         Settings.System.QS_QUICK_PULLDOWN, 0);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
         updatePulldownSummary(quickPulldownValue);
+
+        mCollapsePanel = (CheckBoxPreference) findPreference(PRE_COLLAPSE_PANEL);
+        mCollapsePanel.setChecked(Settings.System.getInt(getContentResolver(),
+        Settings.System.QS_COLLAPSE_PANEL, 0) == 1);
+        mCollapsePanel.setOnPreferenceChangeListener(this);
     }
 
     private void updatePulldownSummary(int value) {
@@ -73,6 +78,9 @@ OnPreferenceChangeListener {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                                    Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
             updatePulldownSummary(quickPulldownValue);
+            return true;
+        } else if (preference == mCollapsePanel) {
+            Settings.System.putInt(getContentResolver(), Settings.System.QS_COLLAPSE_PANEL, (Boolean) newValue ? 1 : 0);
             return true;
         }
         return false;

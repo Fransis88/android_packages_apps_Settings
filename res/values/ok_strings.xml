@@ -25,7 +25,7 @@
     <!-- OmniKang Settings -->
     <string name="omnikang_settings">OmniKang Settings</string>
     <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_style_title">Extras</string>
+    <string name="status_bar_style_title">Style</string>
     <string name="notification_drawer_title">Notification drawer</string>
     <string name="lockscreen_category">Lockscreen</string>
 
@@ -433,4 +433,9 @@
 
     <!-- Restart SystemUI -->
     <string name="restart_systemui">Restart SystemUI</string>
+
+    <!-- QuickSettings: Quick Collapse -->
+    <string name="title_collapse_panel">Quick collapse</string>
+    <string name="summary_collapse_panel">Close the notification panel upon toggle</string>
+
 </resources>
