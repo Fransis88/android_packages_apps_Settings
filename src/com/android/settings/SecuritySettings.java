@@ -157,6 +157,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
+        // App security settings
+        addPreferencesFromResource(R.xml.security_settings_app_slim);
+
         // Add options for lock/unlock screen
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
@@ -408,10 +411,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 mToggleVerifyApps.setChecked(false);
                 mToggleVerifyApps.setEnabled(false);
             }
-
-            // App security settings
-            addPreferencesFromResource(R.xml.security_settings_app_slim);
-
         } else {
             if (deviceAdminCategory != null) {
                 deviceAdminCategory.removePreference(mToggleVerifyApps);
