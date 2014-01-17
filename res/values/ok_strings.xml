@@ -432,7 +432,4 @@
     <string name="title_collapse_panel">Quick collapse</string>
     <string name="summary_collapse_panel">Close the notification panel upon toggle</string>
 
-    <!-- Quick access ribbon -->
-    <string name="category_quick_access">Quick Access ribbon</string>
-    <string name="title_quick_access">Show in drawer</string>
 </resources>

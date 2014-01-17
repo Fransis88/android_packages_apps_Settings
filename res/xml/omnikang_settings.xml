@@ -61,16 +61,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_quick_access">
-
-        <CheckBoxPreference
-            android:key="qs_quick_access"
-            android:title="@string/title_quick_access"
-            android:defaultValue="false" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="navigation_bar"
         android:title="@string/navigation_bar_category">
 
