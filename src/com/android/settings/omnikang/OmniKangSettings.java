@@ -41,10 +41,12 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "OmniKangSettings";
 
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
+    private static final String SOFT_BACK_KILL_APP = "soft_back_kill_app";
 
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
     private CheckBoxPreference mReverseDefaultAppPicker;
+    private CheckBoxPreference mSoftBackKillApp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,11 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         // Hide navigation bar category on devices without navigation bar
         if (!hasNavBar) {
             prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
+        } else {
+            mSoftBackKillApp = (CheckBoxPreference) prefSet.findPreference(SOFT_BACK_KILL_APP);
+            mSoftBackKillApp.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.SOFT_BACK_KILL_APP_ENABLE, 0) == 1);
+            mSoftBackKillApp.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -83,7 +90,14 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
 
-        return false;
+        if (preference == mSoftBackKillApp) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(resolver,
+                Settings.System.SOFT_BACK_KILL_APP_ENABLE, value ? 1 : 0);
+        } else {
+            return false;
+        }
+        return true;
     }
 
 

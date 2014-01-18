@@ -318,6 +318,7 @@
     <string name="navring_action_torch">Toggle torch</string>
     <string name="navring_action_google_now">Google Now</string>
     <string name="navring_choose_action_title">Choose action</string>
+    <string name="navring_action_last_app">Switch to last app</string>
 
     <!-- Navigation bar -->
     <string name="navbar_dimen_title">Dimensions</string>
@@ -335,6 +336,9 @@
     <string name="navigation_bar_size_40_dp">40 dp</string>
     <string name="navigation_bar_size_42_dp">42 dp</string>
     <string name="navigation_bar_size_0_dp">0 dp (off)</string>
+
+    <string name="soft_back_kill_app_title">Long press back to kill app</string>
+    <string name="soft_back_kill_app_summary">Long pressing back button will kill foreground app</string>
 
     <!-- Setting checkbox title for root access -->
     <string name="root_access">Root access</string>
