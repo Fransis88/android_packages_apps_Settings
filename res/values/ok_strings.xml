@@ -451,4 +451,7 @@
     <string name="system_icon_color">Icon color</string>
     <string name="custom_color_summary">Override the system color of the systemui</string>
 
+    <!-- OmniSwitch -->
+    <string name="omniswitch_settings_title">OmniSwitch</string>
+
 </resources>
