@@ -17,19 +17,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/status_bar_style_title">
 
-    <ListPreference
-        android:key="quick_pulldown"
-        android:title="@string/quick_pulldown_title"
-        android:entries="@array/quick_pulldown_entries"
-        android:entryValues="@array/quick_pulldown_values"
-        android:persistent="false" />
-
-    <CheckBoxPreference
-        android:key="collapse_panel"
-        android:title="@string/title_collapse_panel"
-        android:summary="@string/summary_collapse_panel"
-        android:defaultValue="false" />
-
     <CheckBoxPreference
         android:key="custom_status_bar_color"
         android:title="@string/custom_status_bar_color_title"

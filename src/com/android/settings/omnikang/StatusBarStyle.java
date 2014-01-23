@@ -40,17 +40,11 @@ OnPreferenceChangeListener {
     
     private static final String TAG = "StatusBarStyle";
 
-    private static final String QUICK_PULLDOWN = "quick_pulldown";
-    private static final String PRE_COLLAPSE_PANEL = "collapse_panel";
-
     private static final String PREF_CUSTOM_STATUS_BAR_COLOR = "custom_status_bar_color";
     private static final String PREF_STATUS_BAR_OPAQUE_COLOR = "status_bar_opaque_color";
 //    private static final String PREF_STATUS_BAR_SEMI_TRANS_COLOR = "status_bar_trans_color";
     private static final String PREF_CUSTOM_SYSTEM_ICON_COLOR = "custom_system_icon_color";
     private static final String PREF_SYSTEM_ICON_COLOR = "system_icon_color";
-
-    private ListPreference mQuickPulldown;
-    CheckBoxPreference mCollapsePanel;
 
     private CheckBoxPreference mCustomBarColor;
     private ColorPickerPreference mBarOpaqueColor;
@@ -64,23 +58,8 @@ OnPreferenceChangeListener {
         
         addPreferencesFromResource(R.xml.status_bar_style);
         
-        // Quick Settings pull down
-        mQuickPulldown = (ListPreference) getPreferenceScreen().findPreference(QUICK_PULLDOWN);
-        mQuickPulldown.setOnPreferenceChangeListener(this);
-        int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext()
-                                                        .getContentResolver(),
-                                                        Settings.System.QS_QUICK_PULLDOWN, 0);
-        mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
-        updatePulldownSummary(quickPulldownValue);
-
-        mCollapsePanel = (CheckBoxPreference) findPreference(PRE_COLLAPSE_PANEL);
-        mCollapsePanel.setChecked(Settings.System.getInt(getContentResolver(),
-        Settings.System.QS_COLLAPSE_PANEL, 0) == 1);
-        mCollapsePanel.setOnPreferenceChangeListener(this);
-
         int intColor;
         String hexColor;
-
 
         PackageManager pm = getPackageManager();
         Resources systemUiResources;
@@ -142,29 +121,8 @@ OnPreferenceChangeListener {
         mIconColor.setNewPreviewColor(intColor);
     }
 
-    private void updatePulldownSummary(int value) {
-        Resources res = getResources();
-        if (value == 0) {
-            /* quick pulldown deactivated */
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
-        } else {
-            String direction = res.getString(value == 2
-                                             ? R.string.quick_pulldown_summary_left : R.string.quick_pulldown_summary_right);
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary, direction));
-        }
-    }
-
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mQuickPulldown) {
-            int quickPulldownValue = Integer.valueOf((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                                   Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
-            updatePulldownSummary(quickPulldownValue);
-            return true;
-        } else if (preference == mCollapsePanel) {
-            Settings.System.putInt(getContentResolver(), Settings.System.QS_COLLAPSE_PANEL, (Boolean) objValue ? 1 : 0);
-            return true;
-        } else if (preference == mBarOpaqueColor) {
+        if (preference == mBarOpaqueColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
                     .valueOf(String.valueOf(objValue)));
             preference.setSummary(hex);
