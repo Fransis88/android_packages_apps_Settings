@@ -644,4 +644,8 @@
     <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
     <string name="double_tap_to_sleep_summary">Either on Statusbar, Lockscreen PIN, Password, Pattern or GlowPad</string>
 
+    <!-- Disable safe volume warning with headphones -->
+    <string name="disable_safe_volume_title">Disable safe volume warning</string>
+    <string name="disable_safe_volume_summary">This will disable the safe volume warning when using headphones. A reboot is necessary in order to take effect.</string>
+
 </resources>

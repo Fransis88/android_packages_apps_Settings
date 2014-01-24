@@ -132,6 +132,12 @@
             android:summary="@string/double_tap_to_sleep_summary"
             android:defaultValue="false" />
 
+        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
+            android:key="disable_safe_volume"
+            android:title="@string/disable_safe_volume_title"
+            android:summary="@string/disable_safe_volume_summary" 
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
