@@ -157,16 +157,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
-<<<<<<< HEAD
-=======
-        // Add package manager to check if features are available
-        PackageManager pm = getPackageManager();
-
-        // App security settings
-        addPreferencesFromResource(R.xml.security_settings_app_slim);
-        mBlacklist = (PreferenceScreen) root.findPreference(KEY_BLACKLIST);
-
->>>>>>> ea5f3fa... Settings: reorder app security to top
         // Add options for lock/unlock screen
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
@@ -430,17 +420,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
-<<<<<<< HEAD
-=======
-        // Determine options based on device telephony support
-        if (!pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
-            // No telephony, remove dependent options
-            PreferenceGroup appCategory = (PreferenceGroup)
-                    root.findPreference(KEY_APP_SECURITY_CATEGORY);
-            appCategory.removePreference(mBlacklist);
-        }
-
->>>>>>> ea5f3fa... Settings: reorder app security to top
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         if (mNotificationAccess != null) {
             final int total = NotificationAccessSettings.getListenersCount(mPM);
