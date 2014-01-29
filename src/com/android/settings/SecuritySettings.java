@@ -134,9 +134,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mLockRingBattery;
     private CheckBoxPreference mMaximizeKeyguardWidgets;
     private CheckBoxPreference mQuickUnlockScreen;
-    private CheckBoxPreference mEnableCameraWidget;
-    private CheckBoxPreference mEnablePowerMenu;
-    private CheckBoxPreference mSeeThrough;
     private ListPreference mLockNumpadRandom;
     private CheckBoxPreference mMenuUnlock;
 
