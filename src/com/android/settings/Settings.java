@@ -1115,7 +1115,11 @@ public class Settings extends PreferenceActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+        Log.i(LOG_TAG, "TRDS: onConfigurationChanged");
+
         if (newConfig.uiThemeMode != mCurrentState && HeaderAdapter.mThemeEnabler != null) {
+            Log.i(LOG_TAG, "TRDS: newConfig.uiThemeMode != mCurrentState");
+
             mCurrentState = newConfig.uiThemeMode;
             HeaderAdapter.mThemeEnabler.setSwitchState();
         }

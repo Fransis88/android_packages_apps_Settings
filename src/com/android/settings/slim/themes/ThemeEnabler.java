@@ -22,6 +22,7 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class ThemeEnabler implements CompoundButton.OnCheckedChangeListener {
     private boolean mAttached;
     private SettingsObserver mSettingsObserver;
 
+    private static final String LOG_TAG = "ThemeEnabler";
+
     private final class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
             super(handler);
@@ -51,6 +54,7 @@ public class ThemeEnabler implements CompoundButton.OnCheckedChangeListener {
 
         @Override
         public void onChange(boolean selfChange) {
+            Log.i(LOG_TAG, "TRDS: SettingsObserver: onChange");
             setSwitchState();
         }
     }
@@ -87,18 +91,30 @@ public class ThemeEnabler implements CompoundButton.OnCheckedChangeListener {
     }
 
     public void setSwitchState() {
+        Log.i(LOG_TAG, "TRDS: setSwitchState");
         mEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.UI_THEME_AUTO_MODE, 0,
                 UserHandle.USER_CURRENT) != 1;
 
+        Log.i(LOG_TAG, "TRDS: UI_THEME_AUTO_MODE = " + mEnabled);
+
         boolean state = mContext.getResources().getConfiguration().uiThemeMode
                     == Configuration.UI_THEME_MODE_HOLO_DARK;
+
+        if (state) {
+            Log.i(LOG_TAG, "TRDS: uiThemeMode= UI_THEME_MODE_HOLO_DARK");
+        } else {
+            Log.i(LOG_TAG, "TRDS: uiThemeMode= UI_THEME_MODE_HOLO_LIGHT");
+        }
+
         mStateMachineEvent = true;
         mSwitch.setChecked(state);
         mStateMachineEvent = false;
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.i(LOG_TAG, "TRDS: onCheckedChanged: " + isChecked);
+
         if (mStateMachineEvent) {
             return;
         }
