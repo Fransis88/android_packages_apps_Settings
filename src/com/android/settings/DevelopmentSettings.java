@@ -518,7 +518,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         final ContentResolver cr = context.getContentResolver();
         mHaveDebugSettings = false;
         updateCheckBox(mEnableAdb, Settings.Global.getInt(cr,
-                Settings.Global.ADB_ENABLED, 0) != 0);
+                Settings.Global.ADB_ENABLED, 1) != 0);
         mAdbNotify.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_NOTIFY, 1) != 0);
         if (mEnableTerminal != null) {
@@ -797,7 +797,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private boolean enableVerifierSetting() {
         final ContentResolver cr = getActivity().getContentResolver();
-        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED, 0) == 0) {
+        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED, 1) == 0) {
             return false;
         }
         if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) == 0) {
@@ -824,7 +824,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if ("user".equals(Build.TYPE)) {
             final ContentResolver resolver = getActivity().getContentResolver();
             final boolean adbEnabled = Settings.Global.getInt(
-                    resolver, Settings.Global.ADB_ENABLED, 0) != 0;
+                    resolver, Settings.Global.ADB_ENABLED, 1) != 0;
             if (adbEnabled) {
                 mBugreport.setEnabled(true);
                 mBugreportInPower.setEnabled(true);
