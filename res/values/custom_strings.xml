@@ -101,7 +101,7 @@
     <string name="interface_more_title">More\u2026</string>
     <string name="interface_bars_title">Bars</string>
     <string name="interface_menus_title">Menus</string>
-    <string name="interface_notification_panel_title">Notification Drawer</string>
+    <string name="interface_notification_panel_title">Notification drawer</string>
 
     <!-- Turn on display when power connected; turn off display when power disconnected -->
     <string name="wake_when_plugged_or_unplugged_title">Wake on plug</string>
