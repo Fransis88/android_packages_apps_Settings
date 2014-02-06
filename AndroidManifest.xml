@@ -1778,9 +1778,8 @@
         <activity android:name=".omnikang.Halo" />
         <activity android:name=".omnikang.NotificationDrawerStyle" />
         <activity android:name=".omnikang.LockscreenTargets" />
-
         <activity android:name=".slim.privacyguard.PrivacyGuardManager" />
-
+        <activity android:name=".du.WakeLockBlocker" />
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereSettings" />
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereCreateGestureActivity" />

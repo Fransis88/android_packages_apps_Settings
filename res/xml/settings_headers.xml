@@ -141,6 +141,14 @@
         android:icon="@drawable/ic_dt_gesture_anywhere"
         android:title="@string/gesture_anywhere_title" />
 
+    <!-- Wakelock Blocker -->
+    <Pheader
+        android:id="@+id/wakelock_blocker"
+        android:fragment="com.android.settings.du.WakeLockBlocker"
+        android:icon="@drawable/ic_menu_save"
+        android:layout="@layout/preference_wakelockblocker"
+        android:title="@string/wakelock_blocker" />
+
     <!-- Themes -->
     <header
         android:id="@+id/theme_settings"
