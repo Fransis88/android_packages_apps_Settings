@@ -27,7 +27,12 @@ public class SeekBarPreference extends Preference
     private SeekBar bar;
 
     int defaultValue = 60;
+    int mSetDefault = -1;
+    int mMultiply = -1;
+    int mMinimum = -1;
+    boolean mDisableText = false;
     boolean mDisablePercentageValue = false;
+    boolean mIsMilliSeconds = false;
 
     private OnPreferenceChangeListener changer;
 
@@ -50,10 +55,8 @@ public class SeekBarPreference extends Preference
             progress = defaultValue;
         }
         bar.setOnSeekBarChangeListener(this);
-        bar.setProgress(progress);
-        if (!mDisablePercentageValue) {
-            monitorBox.setText(progress + "%");
-        }
+        bar.setProgress(defaultValue);
+
         return layout;
     }
 
@@ -89,6 +92,25 @@ public class SeekBarPreference extends Preference
         if (!mDisablePercentageValue) {
             monitorBox.setText(progress + "%");
         }
+        if (mMultiply != -1) {
+            progress = progress * mMultiply;
+        }
+
+        if (mMinimum != -1) {
+            progress += mMinimum;
+        }
+
+        if (progress == mSetDefault) {
+            monitorBox.setText(R.string.default_string);
+        } else if (!mDisableText) {
+            if (mIsMilliSeconds) {
+                monitorBox.setText(progress + " ms");
+            } else if (!mDisablePercentageValue) {
+                monitorBox.setText(progress + "%");
+            } else {
+                monitorBox.setText(progress);
+            }
+        }
         changer.onPreferenceChange(this, Integer.toString(progress));
     }
 
@@ -108,6 +130,30 @@ public class SeekBarPreference extends Preference
 
     public void setProperty(String property) {
         this.property = property;
+    }
+
+    public void disableText(boolean disable) {
+        mDisableText = disable;
+    }
+
+    public void setInterval(int inter) {
+        interval = inter;
+    }
+
+    public void setDefault(int defaultVal) {
+        mSetDefault = defaultVal;
+    }
+
+    public void multiplyValue(int val) {
+        mMultiply = val;
+    }
+
+    public void minimumValue(int val) {
+        mMinimum = val;
+    }
+
+    public void isMilliseconds(boolean millis) {
+        mIsMilliSeconds = millis;
     }
 
     @Override
