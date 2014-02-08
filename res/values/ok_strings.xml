@@ -582,4 +582,7 @@
     <string name="app_ops_reset_confirm_title">Confirm counters reset</string>
     <string name="app_ops_reset_confirm_mesg">Are you sure you wish to reset AppOps counters ?</string>
 
+    <string name="emulate_menu_key_title">Emulate hardware menu key</string>
+    <string name="emulate_menu_key_summary">Force hide the three-dot overflow menu in applications. Require restart of application</string>
+
 </resources>
