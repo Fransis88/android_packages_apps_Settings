@@ -103,7 +103,7 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(resolver,
                     Settings.System.SOFT_BACK_KILL_APP_ENABLE, value ? 1 : 0);
         } else if (preference == mEmulateMenuKey) {
-            boolean value = (Boolean) objValue;
+            boolean value = (Boolean) newValue;
             Settings.System.putInt(resolver,
                     Settings.System.EMULATE_HW_MENU_KEY, value ? 1 : 0);
         } else {
