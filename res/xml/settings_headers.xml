@@ -142,7 +142,7 @@
         android:title="@string/gesture_anywhere_title" />
 
     <!-- Wakelock Blocker -->
-    <Pheader
+    <header
         android:id="@+id/wakelock_blocker"
         android:fragment="com.android.settings.du.WakeLockBlocker"
         android:icon="@drawable/ic_menu_save"
