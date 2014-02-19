@@ -49,7 +49,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     private String mHelpUrl;
 
-    //Needed for Lockscreen Notifications
     protected Context mContext;
 
     // Cache the content resolver for async callbacks
@@ -59,7 +58,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-	mContext = getActivity().getApplicationContext();
+        mContext = getActivity().getApplicationContext();
 
         // Prepare help url and enable menu if necessary
         int helpResource = getHelpResource();
@@ -313,7 +312,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         if (getActivity() instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
             preferenceActivity.startPreferencePanel(fragmentClass, extras,
-                    R.string.lock_settings_picker_title, null, caller, requestCode);
+                    R.string.settings_label, null, caller, requestCode);
             return true;
         } else {
             Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "
