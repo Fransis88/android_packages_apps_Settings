@@ -47,6 +47,8 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
 
     private static final String TAG = "BatteryIconStyle";
 
+    private static final String SHOW_BATTERY_ICON = "show_battery_icon";
+
     private static final String PREF_STATUS_BAR_BATTERY = "battery_icon";
     private static final String PREF_STATUS_BAR_BATTERY_COLOR = "battery_color";
     private static final String PREF_STATUS_BAR_BATTERY_TEXT_COLOR = "battery_text_color";
@@ -54,6 +56,8 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
     private static final String PREF_STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED = "circle_battery_animation_speed";
 
     private static final int MENU_RESET = Menu.FIRST;
+
+    private CheckBoxPreference mShowBatteryIcon;
 
     private ListPreference mStatusBarBattery;
     private ColorPickerPreference mBatteryColor;
@@ -102,6 +106,13 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
         mBatteryColor.setOnPreferenceChangeListener(this);
         intColor = Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_BATTERY_COLOR, -2);
+
+        mShowBatteryIcon = (CheckBoxPreference) prefSet.findPreference(SHOW_BATTERY_ICON);
+        mShowBatteryIcon.setChecked((Settings.System.getInt(
+                getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.SHOW_BATTERY_ICON, 1) == 1));
+        mShowBatteryIcon.setOnPreferenceChangeListener(this);
+
         if (intColor == -2) {
             intColor = systemUiResources.getColor(systemUiResources.getIdentifier(
                     "com.android.systemui:color/batterymeter_charge_color", null, null));
@@ -239,6 +250,13 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
                     Settings.System.STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED, val);
             mCircleAnimSpeed.setSummary(mCircleAnimSpeed.getEntries()[index]);
             return true;
+
+        } else if (preference == mShowBatteryIcon) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.SHOW_BATTERY_ICON,
+                    (Boolean) newValue ? 1 : 0);
+            return true;
+
         }
         return false;
     }

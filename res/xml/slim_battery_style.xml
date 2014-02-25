@@ -18,8 +18,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/battery_icon_title">
 
+    <CheckBoxPreference
+        android:key="show_battery_icon"
+        android:summary="@string/show_battery_icon_summary"
+        android:title="@string/show_battery_icon_title"
+        android:defaultValue="true" />
+
     <ListPreference
         android:key="battery_icon"
+        android:dependency="show_battery_icon"
         android:dialogTitle="@string/battery_icon_title"
         android:title="@string/battery_icon_title"
         android:entries="@array/entries_battery_icon"
@@ -27,22 +34,26 @@
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="battery_color"
+        android:dependency="show_battery_icon"
         android:title="@string/battery_color_title"
         android:defaultValue="0xffffffff" />
 
     <ListPreference
         android:key="circle_battery_animation_speed"
+        android:dependency="show_battery_icon"
         android:title="@string/circle_battery_animation_speed"
         android:entries="@array/circle_battery_animation_speed_entries"
         android:entryValues="@array/circle_battery_animation_speed_values" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="battery_text_color"
+        android:dependency="show_battery_icon"
         android:title="@string/battery_text_color"
         android:defaultValue="0xffffffff" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="battery_text_charging_color"
+        android:dependency="show_battery_icon"
         android:title="@string/battery_text_charging_color"
         android:defaultValue="0xffffffff" />
 
