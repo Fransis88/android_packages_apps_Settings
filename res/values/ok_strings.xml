@@ -766,4 +766,8 @@ selecting the profile in the future.</string>
     <string name="toggle2g3g">2G/3G</string>
     <string name="toggleNfc">NFC</string>
 
+    <!-- Double tap to sleep  -->
+    <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
+    <string name="double_tap_to_sleep_summary">Either on Statusbar, Lockscreen PIN, Password, Pattern or GlowPad</string>
+
 </resources>
