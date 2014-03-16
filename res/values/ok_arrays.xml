@@ -568,6 +568,9 @@
         <item>@string/app_ops_summaries_data_change</item>
         <item>@string/app_ops_summaries_alarm_wakeup</item>
         <item>@string/app_ops_summaries_auto_start</item>
+        <item>idk1</item>
+        <item>idk2</item>
+        <item>@string/app_ops_summaries_auto_start</item>
     </string-array>
 
     <string-array name="app_ops_labels_cm">
@@ -619,6 +622,9 @@
         <item>@string/app_ops_labels_data_change</item>
         <item>@string/app_ops_labels_alarm_wakeup</item>
         <item>@string/app_ops_labels_auto_start</item>
+        <item>IDK1</item>
+        <item>IDK2</item>
+        <item>@string/app_ops_labels_auto_start</item>
     </string-array>
 
     <!-- Names of categories of app ops tabs -->
@@ -628,7 +634,7 @@
         <item>Messaging</item>
         <item>Media</item>
         <item>Device</item>
-        <item>@string/app_ops_categories_bootup</item>
+        <item>Bootup</item>
     </string-array>
 
     <!-- Gesture Anywhere -->

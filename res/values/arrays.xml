@@ -621,6 +621,7 @@
         <item>Messaging</item>
         <item>Media</item>
         <item>Device</item>
+        <item>Bootup</item>
     </string-array>
 
     <!-- User display names for app ops codes -->
