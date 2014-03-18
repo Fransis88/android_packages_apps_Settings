@@ -648,4 +648,7 @@
     <string name="disable_safe_volume_title">Disable safe volume warning</string>
     <string name="disable_safe_volume_summary">This will disable the safe volume warning when using headphones. A reboot is necessary in order to take effect.</string>
 
+    <!-- Brightness Slider -->
+    <string name="notification_drawer_brightness_slider_title">Brightness Slider</string>
+
 </resources>

@@ -58,6 +58,11 @@
             android:title="@string/notification_style_title"
             android:summary="@string/notification_style_summary" />
 
+        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
+            android:key="notification_brightness_slider"
+            android:title="@string/notification_drawer_brightness_slider_title"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
