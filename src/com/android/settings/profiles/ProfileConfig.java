@@ -279,6 +279,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
             mDisableADPreference.setTitle(R.string.profile_disable_ad_wakeup_title);
             mDisableADPreference.setPersistent(false);
             mDisableADPreference.setSummary(R.string.profile_disable_ad_wakeup_summary);
+            mDisableADPreference.setChecked(mProfile.getDisableAD());
             mDisableADPreference.setOnPreferenceChangeListener(this);
 
             systemPrefs.addPreference(mDisableADPreference);
@@ -381,8 +382,6 @@ public class ProfileConfig extends SettingsPreferenceFragment
             mProfile.setScreenLockMode(Integer.valueOf((String) newValue));
             mScreenLockModePreference.setSummary(getResources().getStringArray(
                     R.array.profile_lockmode_summaries)[mProfile.getScreenLockMode()]);
-        } else if (preference == mDisableADPreference) {
-            mProfile.setDisableAD((Boolean) newValue);
         }
         return true;
     }
@@ -392,9 +391,12 @@ public class ProfileConfig extends SettingsPreferenceFragment
         Log.d(TAG, "onPreferenceTreeClick(): entered" + preferenceScreen.getKey() + preference.getKey());
         if (preference instanceof PreferenceScreen) {
             startProfileGroupActivity(preference.getKey(), preference.getTitle().toString());
-            return true;
+        } else if (preference == mDisableADPreference) {
+            mProfile.setDisableAD(mDisableADPreference.isChecked());
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return true;
     }
 
     private void startProfileGroupActivity(String key, String title) {
