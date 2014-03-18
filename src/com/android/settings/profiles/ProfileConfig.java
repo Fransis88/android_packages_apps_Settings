@@ -36,6 +36,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -71,6 +72,8 @@ public class ProfileConfig extends SettingsPreferenceFragment
     private NamePreference mNamePreference;
 
     private ListPreference mScreenLockModePreference;
+
+    private CheckBoxPreference mDisableADPreference;
 
     // constant value that can be used to check return code from sub activity.
     private static final int PROFILE_GROUP_DETAILS = 1;
@@ -270,6 +273,16 @@ public class ProfileConfig extends SettingsPreferenceFragment
             }
 
             systemPrefs.addPreference(mScreenLockModePreference);
+
+            // Disable Active Display preference
+            mDisableADPreference = new CheckBoxPreference(getActivity());
+            mDisableADPreference.setTitle(R.string.profile_disable_ad_wakeup_title);
+            mDisableADPreference.setPersistent(false);
+            mDisableADPreference.setSummary(R.string.profile_disable_ad_wakeup_summary);
+            mDisableADPreference.setOnPreferenceChangeListener(this);
+
+            systemPrefs.addPreference(mDisableADPreference);
+
         }
 
         // Populate the audio streams list
@@ -368,6 +381,8 @@ public class ProfileConfig extends SettingsPreferenceFragment
             mProfile.setScreenLockMode(Integer.valueOf((String) newValue));
             mScreenLockModePreference.setSummary(getResources().getStringArray(
                     R.array.profile_lockmode_summaries)[mProfile.getScreenLockMode()]);
+        } else if (preference == mDisableADPreference) {
+            mProfile.setDisableAD((Boolean) newValue);
         }
         return true;
     }
