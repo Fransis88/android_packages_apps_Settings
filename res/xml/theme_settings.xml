@@ -17,6 +17,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/theme_settings_title">
 
+    <SwitchPreference
+        android:key="trds_enabled"
+        android:title="@string/trds_enable_title" />
+
     <ListPreference
         android:key="pref_theme_auto_mode"
         android:entries="@array/theme_auto_mode_entries"

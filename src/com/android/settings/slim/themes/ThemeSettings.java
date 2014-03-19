@@ -19,12 +19,15 @@ package com.android.settings.slim.themes;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.ListPreference;
+import android.preference.SwitchPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.util.Log;
@@ -34,19 +37,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class ThemeSettings extends SettingsPreferenceFragment {
+public class ThemeSettings extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String THEME_AUTO_MODE =
         "pref_theme_auto_mode";
 
+    private static final String KEY_TRDS_ENABLED = "trds_enabled";
+
+    private SwitchPreference mTrdsEnabled;
     private ListPreference mThemeAutoMode;
-    private ThemeEnabler mThemeEnabler;
 
     private int mCurrentState = 0;
+    private boolean mEnabled;
+
+    private boolean mAttached;
+    private SettingsObserver mSettingsObserver;
+
+    private final class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContext.getContentResolver().registerContentObserver(
+                    Settings.Secure.getUriFor(
+                    Settings.Secure.UI_THEME_AUTO_MODE),
+                    false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            setSwitchState();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +84,8 @@ public class ThemeSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.theme_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mSettingsObserver = new SettingsObserver(new Handler());
 
         mThemeAutoMode = (ListPreference) prefSet.findPreference(THEME_AUTO_MODE);
         mThemeAutoMode.setValue(String.valueOf(
@@ -79,51 +110,79 @@ public class ThemeSettings extends SettingsPreferenceFragment {
             }
         });
 
-        final Activity activity = getActivity();
-        final Switch actionBarSwitch = new Switch(activity);
+        mEnabled = Settings.Secure.getIntForUser(getContentResolver(),
+                Settings.Secure.UI_THEME_AUTO_MODE, 0,
+                UserHandle.USER_CURRENT) != 1;
 
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPaddingRelative(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END));
-            }
-        }
-        mThemeEnabler = new ThemeEnabler(activity, actionBarSwitch);
+        boolean state = getResources().getConfiguration().uiThemeMode
+                    == Configuration.UI_THEME_MODE_HOLO_DARK;
 
+        mTrdsEnabled = (SwitchPreference) findPreference(KEY_TRDS_ENABLED);
+        mTrdsEnabled.setChecked(state);
+        mTrdsEnabled.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mThemeEnabler != null) {
-            mThemeEnabler.resume();
+        if (!mAttached) {
+            mAttached = true;
+            mSettingsObserver.observe();
         }
+        setSwitchState();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mThemeEnabler != null) {
-            mThemeEnabler.pause();
+        if (mAttached) {
+            mAttached = false;
+            mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
         }
+    }
+
+    public void setSwitchState() {
+        mEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.UI_THEME_AUTO_MODE, 0,
+                UserHandle.USER_CURRENT) != 1;
+
+        boolean state = mContext.getResources().getConfiguration().uiThemeMode
+                    == Configuration.UI_THEME_MODE_HOLO_DARK;
+
+        mTrdsEnabled.setChecked(state);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (newConfig.uiThemeMode != mCurrentState && mThemeEnabler != null) {
+        if (newConfig.uiThemeMode != mCurrentState) {
             mCurrentState = newConfig.uiThemeMode;
-            mThemeEnabler.setSwitchState();
+            setSwitchState();
         }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mTrdsEnabled) {
+            if (!mEnabled) {
+                Toast.makeText(mContext, R.string.theme_auto_switch_mode_error,
+                        Toast.LENGTH_SHORT).show();
+                setSwitchState();
+            } else {
+                // Handle a switch change
+                // we currently switch between holodark and hololight till either
+                // theme engine is ready or lightheme is ready. Currently due of
+                // missing light themeing hololight = system base theme
+                Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                        Settings.Secure.UI_THEME_MODE, ((Boolean) newValue).booleanValue()
+                            ? Configuration.UI_THEME_MODE_HOLO_DARK
+                            : Configuration.UI_THEME_MODE_HOLO_LIGHT,
+                        UserHandle.USER_CURRENT);
+                setSwitchState();
+                return true;
+            }
+        }
+        return false;
     }
 
 }
