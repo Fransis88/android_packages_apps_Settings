@@ -677,6 +677,13 @@
                 android:resource="@id/interface_bars" />
         </activity>
 
+        <activity android:name="Settings$AutoBrightnessDialogActivity"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="org.omnirom.omnigears.brightness.AutoBrightnessDialog" />
+        </activity>
+
         <activity android:name="Settings$MenusSettingsActivity"
                 android:label="@string/interface_menus_title"
                 android:taskAffinity=""
