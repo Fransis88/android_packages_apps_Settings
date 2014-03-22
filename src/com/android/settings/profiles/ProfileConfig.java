@@ -277,7 +277,7 @@ public class ProfileConfig extends SettingsPreferenceFragment
             // Disable Active Display preference
             mDisableADPreference = new CheckBoxPreference(getActivity());
             mDisableADPreference.setTitle(R.string.profile_disable_ad_wakeup_title);
-            mDisableADPreference.setPersistent(false);
+            mDisableADPreference.setPersistent(true);
             mDisableADPreference.setSummary(R.string.profile_disable_ad_wakeup_summary);
             mDisableADPreference.setChecked(mProfile.getDisableAD());
             mDisableADPreference.setOnPreferenceChangeListener(this);
