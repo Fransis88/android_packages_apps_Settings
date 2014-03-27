@@ -126,10 +126,11 @@
             android:title="@string/ram_bar_title"
             android:summary="@string/ram_bar_summary" />
 
-        <CheckBoxPreference
+        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
             android:key="reverse_default_app_picker"
             android:title="@string/reverse_default_app_picker"
-            android:summary="@string/reverse_default_app_picker_summary" />
+            android:summary="@string/reverse_default_app_picker_summary"
+            android:defaultValue="false" />
 
         <org.omnirom.omnigears.preference.SystemCheckBoxPreference
             android:key="double_tap_sleep_gesture"
@@ -146,17 +147,20 @@
         <org.omnirom.omnigears.preference.SystemCheckBoxPreference
             android:key="disable_fc_notifications"
             android:title="@string/disable_fc_notifications_title"
-            android:summary="@string/disable_fc_notifications_summary" />
+            android:summary="@string/disable_fc_notifications_summary"
+            android:defaultValue="false" />
 
         <org.omnirom.omnigears.preference.SystemCheckBoxPreference
             android:key="suppress_datadisconnected_notification"
             android:title="@string/suppress_datadisconnected_notification_title"
-            android:summary="@string/suppress_datadisconnected_notification_summary" />
+            android:summary="@string/suppress_datadisconnected_notification_summary"
+            android:defaultValue="false" //>
 
         <org.omnirom.omnigears.preference.SystemCheckBoxPreference
             android:key="suppress_noservice_notification"
             android:title="@string/suppress_noservice_notification_title"
-            android:summary="@string/suppress_noservice_notification_summary" />
+            android:summary="@string/suppress_noservice_notification_summary"
+            android:defaultValue="false" //>
 
     </PreferenceCategory>
 

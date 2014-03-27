@@ -40,13 +40,11 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "OmniKangSettings";
 
-    private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String SOFT_BACK_KILL_APP = "soft_back_kill_app";
     private static final String EMULATE_MENU_KEY = "emulate_menu_key";
 
     private static final String CATEGORY_NAVBAR = "navigation_bar";
 
-    private CheckBoxPreference mReverseDefaultAppPicker;
     private CheckBoxPreference mSoftBackKillApp;
     private CheckBoxPreference mEmulateMenuKey;
 
@@ -58,10 +56,6 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         PreferenceScreen prefSet = getPreferenceScreen();
 
         ContentResolver resolver = getActivity().getContentResolver();
-
-        mReverseDefaultAppPicker = (CheckBoxPreference) findPreference(KEY_REVERSE_DEFAULT_APP_PICKER);
-        mReverseDefaultAppPicker.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.REVERSE_DEFAULT_APP_PICKER, 0) != 0);
 
         boolean hasNavBar = getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
@@ -117,13 +111,13 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
         boolean value;
 
-        if (preference == mReverseDefaultAppPicker) {
-            Settings.System.putInt(resolver, Settings.System.REVERSE_DEFAULT_APP_PICKER,
-                    mReverseDefaultAppPicker.isChecked() ? 1 : 0);
-        } else {
+//        if (preference == mDummyPref) {
+//            Settings.System.putInt(resolver, Settings.System.DUMMY_PREF,
+//                    mDummyPref.isChecked() ? 1 : 0);
+//        } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
+//        }
         return true;
     }
 }
