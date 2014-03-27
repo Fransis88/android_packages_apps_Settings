@@ -148,6 +148,16 @@
             android:title="@string/disable_fc_notifications_title"
             android:summary="@string/disable_fc_notifications_summary" />
 
+        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
+            android:key="suppress_datadisconnected_notification"
+            android:title="@string/suppress_datadisconnected_notification_title"
+            android:summary="@string/suppress_datadisconnected_notification_summary" />
+
+        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
+            android:key="suppress_noservice_notification"
+            android:title="@string/suppress_noservice_notification_title"
+            android:summary="@string/suppress_noservice_notification_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
