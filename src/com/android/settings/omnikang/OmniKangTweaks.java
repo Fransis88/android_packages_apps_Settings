@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 OmniKang
+ * Copyright (C) 201 OmniKang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,47 +36,18 @@ import android.view.WindowManagerGlobal;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class OmniKangSettings extends SettingsPreferenceFragment implements
+public class OmniKangTweaks extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "OmniKangSettings";
-
-    private static final String SOFT_BACK_KILL_APP = "soft_back_kill_app";
-    private static final String EMULATE_MENU_KEY = "emulate_menu_key";
-
-    private static final String CATEGORY_NAVBAR = "navigation_bar";
-
-    private CheckBoxPreference mSoftBackKillApp;
-    private CheckBoxPreference mEmulateMenuKey;
+    private static final String TAG = "OmniKangTweaks";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        addPreferencesFromResource(R.xml.omnikang_settings);
+        addPreferencesFromResource(R.xml.omnikang_tweaks);
         PreferenceScreen prefSet = getPreferenceScreen();
 
         ContentResolver resolver = getActivity().getContentResolver();
-
-        boolean hasNavBar = getResources().getBoolean(
-                com.android.internal.R.bool.config_showNavigationBar);
-        // Also check, if users without navigation bar force enabled it.
-        hasNavBar = hasNavBar || (SystemProperties.getInt("qemu.hw.mainkeys", 1) == 0);
-
-        // Hide navigation bar category on devices without navigation bar
-        if (!hasNavBar) {
-            prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
-        } else {
-            mSoftBackKillApp = (CheckBoxPreference) prefSet.findPreference(SOFT_BACK_KILL_APP);
-            mSoftBackKillApp.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.SOFT_BACK_KILL_APP_ENABLE, 0) == 1);
-            mSoftBackKillApp.setOnPreferenceChangeListener(this);
-
-            mEmulateMenuKey = (CheckBoxPreference) prefSet.findPreference(EMULATE_MENU_KEY);
-            mEmulateMenuKey.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.EMULATE_HW_MENU_KEY, 0) == 1);
-            mEmulateMenuKey.setOnPreferenceChangeListener(this);
-
-        }
     }
 
     @Override
@@ -92,17 +63,13 @@ public class OmniKangSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
 
-        if (preference == mSoftBackKillApp) {
-            boolean value = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    Settings.System.SOFT_BACK_KILL_APP_ENABLE, value ? 1 : 0);
-        } else if (preference == mEmulateMenuKey) {
-            boolean value = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    Settings.System.EMULATE_HW_MENU_KEY, value ? 1 : 0);
-        } else {
-            return false;
-        }
+//        if (preference == mDummyPref) {
+//            boolean value = (Boolean) newValue;
+//            Settings.System.putInt(resolver,
+//                    Settings.System.DUMMY_PREF, value ? 1 : 0);
+//        } else {
+//            return false;
+//        }
         return true;
     }
 

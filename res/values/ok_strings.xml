@@ -28,9 +28,8 @@
     <string name="status_bar_style_title">Style</string>
     <string name="notification_drawer_title">Notification drawer</string>
     <string name="lockscreen_category">Lockscreen</string>
-
-    <!-- Settings Group: Tweaks -->
-    <string name="tweaks_category">Tweaks</string>
+    <string name="other_category">Other</string>
+    <string name="tweaks_title">Tweaks</string>
 
     <!-- General strings -->
     <string name="ok">OK</string>

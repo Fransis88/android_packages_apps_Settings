@@ -116,8 +116,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="tweaks_category"
-        android:title="@string/tweaks_category" >
+        android:key="other_category"
+        android:title="@string/other_category" >
 
         <!-- Ram Bar -->
         <PreferenceScreen
@@ -126,41 +126,11 @@
             android:title="@string/ram_bar_title"
             android:summary="@string/ram_bar_summary" />
 
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="reverse_default_app_picker"
-            android:title="@string/reverse_default_app_picker"
-            android:summary="@string/reverse_default_app_picker_summary"
-            android:defaultValue="false" />
-
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="double_tap_sleep_gesture"
-            android:title="@string/double_tap_to_sleep_title"
-            android:summary="@string/double_tap_to_sleep_summary"
-            android:defaultValue="false" />
-
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="disable_safe_volume"
-            android:title="@string/disable_safe_volume_title"
-            android:summary="@string/disable_safe_volume_summary" 
-            android:defaultValue="false" />
-
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="disable_fc_notifications"
-            android:title="@string/disable_fc_notifications_title"
-            android:summary="@string/disable_fc_notifications_summary"
-            android:defaultValue="false" />
-
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="suppress_datadisconnected_notification"
-            android:title="@string/suppress_datadisconnected_notification_title"
-            android:summary="@string/suppress_datadisconnected_notification_summary"
-            android:defaultValue="false" //>
-
-        <org.omnirom.omnigears.preference.SystemCheckBoxPreference
-            android:key="suppress_noservice_notification"
-            android:title="@string/suppress_noservice_notification_title"
-            android:summary="@string/suppress_noservice_notification_summary"
-            android:defaultValue="false" //>
+        <!-- Tweaks -->
+        <PreferenceScreen
+            android:key="omnikang_tweaks"
+            android:fragment="com.android.settings.omnikang.OmniKangTweaks"
+            android:title="@string/tweaks_title" />
 
     </PreferenceCategory>
 

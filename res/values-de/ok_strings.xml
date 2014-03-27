@@ -22,6 +22,7 @@
     <!-- OmniKang Settings -->
     <string name="omnikang_settings">OmniKang Einstellungen</string>
     <string name="status_bar_title">StatusBar</string>
+    <string name="other_category">Sonstige</string>
 
     <!-- TRDS Settings -->
     <string name="trds_settings_title">Dark UI (TRDS)</string>
