@@ -115,6 +115,13 @@
         android:title="@string/omnikang_settings" >
     </header>
 
+    <!-- Navigation -->
+    <header
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_navigation"
+        android:fragment="com.android.settings.slim.NavigationSettings"
+        android:title="@string/navigation_settings_title" />
+
     <!-- OmniSwitch -->
     <header
         android:id="@+id/omniswitch"
@@ -155,13 +162,6 @@
         android:fragment="com.android.settings.slim.themes.ThemeSettings"
         android:icon="@drawable/ic_settings_theme"
         android:title="@string/theme_settings_title" />
-
-    <!-- Navigation -->
-    <header
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings_navigation"
-        android:fragment="com.android.settings.slim.NavigationSettings"
-        android:title="@string/navigation_settings_title" />
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
