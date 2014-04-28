@@ -38,6 +38,7 @@
     <string name="enabled">Enabled</string>
     <string name="default_string">Default</string>
     <string name="additional_options_title">Additional options</string>
+    <string name="reset_message">Reset all entries to default?</string>
 
     <!-- Quick settings -->
     <string name="quick_pulldown_title">Quick Settings pulldown</string>
