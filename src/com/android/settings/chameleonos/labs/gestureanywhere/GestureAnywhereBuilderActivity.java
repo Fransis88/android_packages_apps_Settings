@@ -128,7 +128,7 @@ public class GestureAnywhereBuilderActivity extends ListActivity
 
     @SuppressWarnings({"UnusedDeclaration"})
     public void addGesture(View v) {
-        mPicker.pickShortcut(null, null, 0);
+        mPicker.pickShortcut(0);
     }
 
     @Override
@@ -227,7 +227,8 @@ public class GestureAnywhereBuilderActivity extends ListActivity
         startActivityForResult(intent, REQUEST_NEW_GESTURE);
     }
 
-    public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
+    public void shortcutPicked(String uri,
+            String friendlyName, Bitmap bmp, boolean isApplication) {
         if (TextUtils.isEmpty(uri) || TextUtils.isEmpty(friendlyName)) {
             return;
         }
