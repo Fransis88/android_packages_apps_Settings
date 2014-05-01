@@ -43,7 +43,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
 import com.android.settings.R;
-import com.android.settings.chameleonos.ShortcutPickHelper;
+import com.android.settings.slim.util.ShortcutPickerHelper;
 
 import java.util.Map;
 import java.util.Collections;
@@ -52,7 +52,7 @@ import java.util.Comparator;
 import java.io.File;
 
 public class GestureAnywhereBuilderActivity extends ListActivity
-        implements ShortcutPickHelper.OnPickListener {
+        implements ShortcutPickerHelper.OnPickListener {
     private static final int STATUS_SUCCESS = 0;
     private static final int STATUS_CANCELLED = 1;
     private static final int STATUS_NO_STORAGE = 2;
@@ -89,7 +89,7 @@ public class GestureAnywhereBuilderActivity extends ListActivity
     private EditText mInput;
     private NamedGesture mCurrentRenameGesture;
 
-    private ShortcutPickHelper mPicker;
+    private ShortcutPickerHelper mPicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class GestureAnywhereBuilderActivity extends ListActivity
         mEmpty = (TextView) findViewById(android.R.id.empty);
         loadGestures();
 
-        mPicker = new ShortcutPickHelper(this, this);
+        mPicker = new ShortcutPickerHelper(this, this);
 
         registerForContextMenu(getListView());
     }
@@ -227,7 +227,6 @@ public class GestureAnywhereBuilderActivity extends ListActivity
         startActivityForResult(intent, REQUEST_NEW_GESTURE);
     }
 
-    @Override
     public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
         if (TextUtils.isEmpty(uri) || TextUtils.isEmpty(friendlyName)) {
             return;

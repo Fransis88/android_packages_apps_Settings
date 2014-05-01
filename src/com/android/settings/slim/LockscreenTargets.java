@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -56,6 +57,7 @@ import com.android.settings.slim.util.IconPicker.OnIconPickListener;
 import com.android.settings.slim.util.ShortcutPickerHelper;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -187,6 +189,9 @@ public class LockscreenTargets extends Fragment implements
                 "com.android.keyguard:drawable/ic_lockscreen_target_activated", null, null));
         final String[] targetStore = input.split("\\|");
 
+        ArrayList<String> description = new ArrayList<String>();
+        ArrayList<String> directionDescription = new ArrayList<String>();
+
         //Add the unlock icon
         Drawable unlockFront = mKeyguardResources.getDrawable(mKeyguardResources.getIdentifier(
                 "com.android.keyguard:drawable/ic_lockscreen_unlock_normal", null, null));
@@ -196,10 +201,16 @@ public class LockscreenTargets extends Fragment implements
         unlockTarget.icon = LockscreenTargetUtils.getLayeredDrawable(
                 mActivity, unlockBack, unlockFront, 0, true);
         mTargetStore.add(unlockTarget);
+        description.add(getResources().getString(
+            com.android.internal.R.string.description_target_unlock));
+        directionDescription.add(getResources().getString(
+            com.android.internal.R.string.accessibility_target_direction));
 
         for (int i = 0; i < 8 - mTargetOffset - 1; i++) {
             if (i >= mMaxTargets) {
                 mTargetStore.add(new TargetInfo());
+                description.add("");
+                directionDescription.add("");
                 continue;
             }
 
@@ -236,6 +247,9 @@ public class LockscreenTargets extends Fragment implements
                     }
                 } catch (URISyntaxException e) {
                     Log.w(TAG, "Invalid lockscreen target " + info.uri);
+                    mTargetStore.add(new TargetInfo());
+                    description.add("");
+                    directionDescription.add("");
                 }
             }
 
@@ -249,10 +263,15 @@ public class LockscreenTargets extends Fragment implements
             info.defaultIcon = front;
 
             mTargetStore.add(info);
+            description.add(AppHelper.getFriendlyNameForUri(
+                    mActivity, mPm, info.uri));
+            directionDescription.add("");
         }
 
         for (int i = 0; i < mTargetOffset; i++) {
             mTargetStore.add(new TargetInfo());
+            description.add("");
+            directionDescription.add("");
         }
 
         ArrayList<TargetDrawable> targetDrawables = new ArrayList<TargetDrawable>();
@@ -260,6 +279,8 @@ public class LockscreenTargets extends Fragment implements
             targetDrawables.add(new TargetDrawable(mResources, i != null ? i.icon : null));
         }
         mWaveView.setTargetResources(targetDrawables);
+        mWaveView.setTargetDescriptions(description);
+        mWaveView.setDirectionDescriptions(directionDescription);
     }
 
     /**
@@ -313,8 +334,9 @@ public class LockscreenTargets extends Fragment implements
                 Settings.System.LOCKSCREEN_TARGETS, targets);
 
         for (File image : mActivity.getFilesDir().listFiles()) {
-            if (image.getName().startsWith("lockscreen_")
-                    && !existingImages.contains(image.getAbsolutePath())) {
+            if ((image.getName().startsWith("lockscreen_")
+                    || image.getName().startsWith("lock_shortcut_"))
+                            && !existingImages.contains(image.getAbsolutePath())) {
                 image.delete();
             }
         }
@@ -375,20 +397,47 @@ public class LockscreenTargets extends Fragment implements
     }
 
     @Override
-    public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
+    public void shortcutPicked(String uri, String friendlyName,
+            Bitmap bmp, boolean isApplication) {
         if (uri == null) {
             return;
+        }
+        TargetInfo icon = new TargetInfo();
+        Drawable iconDrawable = null;
+        if (bmp != null) {
+            // Icon is present, save it for future use and add the file path to the action.
+            String fileName = mActivity.getFilesDir()
+                    + File.separator + "lock_shortcut_" + System.currentTimeMillis() + ".png";
+            try {
+                FileOutputStream out = new FileOutputStream(fileName);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.close();
+            } catch (Exception e) {
+                icon = null;
+                e.printStackTrace();
+            } finally {
+                File image = new File(fileName);
+                image.setReadable(true, false);
+                icon.iconType = GlowPadView.ICON_FILE;
+                icon.iconSource = image.getAbsolutePath();
+                iconDrawable = LockscreenTargetUtils.getDrawableFromFile(
+                        mActivity, icon.iconSource);
+            }
+        } else {
+            icon = null;
         }
 
         try {
             Intent intent = Intent.parseUri(uri, 0);
-            Drawable icon = LockscreenTargetUtils.getDrawableFromIntent(mActivity, intent);
+            if (iconDrawable == null) {
+                iconDrawable = LockscreenTargetUtils.getDrawableFromIntent(mActivity, intent);
+            }
 
             mDialogLabel.setText(friendlyName);
             mDialogLabel.setTag(uri);
             // this is a fresh drawable, so we can assign it directly
-            mDialogIcon.setImageDrawable(icon);
-            mDialogIcon.setTag(null);
+            mDialogIcon.setImageDrawable(iconDrawable);
+            mDialogIcon.setTag(icon);
         } catch (URISyntaxException e) {
             Log.wtf(TAG, "Invalid uri " + uri + " on pick");
         }
